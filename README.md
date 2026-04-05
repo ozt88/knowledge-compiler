@@ -78,4 +78,4 @@ knowledge-compiler/
 
 ## 설계 문서
 
-상세 설계와 테스트 결과: [KNOWLEDGE-COMPILER-DESIGN.md](https://github.com/YOUR_USERNAME/knowledge-compiler/blob/main/docs/DESIGN.md)
+상세 설계와 테스트 결과: [docs/DESIGN.md](docs/DESIGN.md)
