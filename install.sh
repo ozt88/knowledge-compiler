@@ -64,7 +64,7 @@ echo ""
 # Check GSD agents exist
 if [ ! -d "$AGENTS_DIR" ]; then
     error "GSD agents directory not found: $AGENTS_DIR"
-    error "Install GSD first: https://github.com/get-shit-done-ai/get-shit-done"
+    error "Install GSD first: https://github.com/gsd-build/get-shit-done"
     exit 1
 fi
 

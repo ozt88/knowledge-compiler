@@ -21,7 +21,7 @@ Phase 검증 완료 → verifier가 knowledge/ full reconcile
 ### 1. GSD 에이전트 패치 (전역, 머신당 1회)
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/knowledge-compiler.git
+git clone https://github.com/ozt88/knowledge-compiler.git
 cd knowledge-compiler
 chmod +x install.sh
 ./install.sh
@@ -73,7 +73,7 @@ knowledge-compiler/
 
 ## 요구사항
 
-- [GSD](https://github.com/get-shit-done-ai/get-shit-done) 1.32.0+
+- [GSD](https://github.com/gsd-build/get-shit-done) 1.32.0+
 - Claude Code CLI
 
 ## 설계 문서
