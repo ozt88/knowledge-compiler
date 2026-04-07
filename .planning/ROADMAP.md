@@ -38,8 +38,10 @@ Plans:
   2. guardrails.md 형식 지시가 절대적/대안 있는 케이스를 긍정형 액션("~경유 필수", "~사용")으로 기술하도록 규정한다
   3. anti-patterns.md 형식 지시가 맥락 의존적 케이스를 관찰-이유-대신 구조로 기술하도록 규정한다
   4. 두 파일(guardrails.md, anti-patterns.md)의 역할 경계가 컴파일러 프롬프트에 명확히 구분된다
-**Plans**: TBD
-**UI hint**: no
+**Plans:** 1 plan
+
+Plans:
+- [ ] 02-01-PLAN.md — researcher/verifier 패치에 guardrails.md 도입 + anti-patterns.md 형식 재정의 + 마이그레이션 절차
 
 ### Phase 3: Collection Instruction Refactor
 **Goal**: CLAUDE.md 턴 수집 지시가 전면 긍정형으로 전환되어 준수율이 향상된다
@@ -55,6 +57,6 @@ Plans:
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 1. Compiler Prompt Refactor | v1.1 | 0/1 | Not started | - |
-| 2. Knowledge Format System | v1.1 | 0/TBD | Not started | - |
+| 1. Compiler Prompt Refactor | v1.1 | 1/1 | Complete | 2026-04-07 |
+| 2. Knowledge Format System | v1.1 | 0/1 | Not started | - |
 | 3. Collection Instruction Refactor | v1.1 | 0/TBD | Not started | - |
