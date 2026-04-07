@@ -29,7 +29,7 @@ GSD 서브에이전트(planner, researcher)가 과거 세션의 시도와 결정
 
 ### Active
 
-- [ ] researcher/verifier 컴파일러 프롬프트 긍정형 전환 (Pink Elephant Problem 대응)
+- [x] researcher/verifier 컴파일러 프롬프트 긍정형 전환 (Pink Elephant Problem 대응) — Validated in Phase 01: compiler-prompt-refactor
 - [ ] CLAUDE.md 턴 수집 규칙 긍정형 전환 (규칙 4 "포함하지 않을 것" → 긍정형)
 - [ ] knowledge/ 파일 형식 긍정형 재구성 (anti-patterns.md → guardrails.md 형식)
 - [ ] 변경 전후 품질 검증 방법 정의
@@ -85,4 +85,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-07 — milestone v1.1 started*
+*Last updated: 2026-04-07 — Phase 01 complete (researcher/verifier 패치 긍정형 전환)*
