@@ -16,12 +16,12 @@ Before researching, check if the project has accumulated knowledge from previous
 3. Read existing knowledge files (if any): `decisions.md`, `anti-patterns.md`, `troubleshooting.md`, `index.md`
 4. Compile new raw entries into knowledge/ structure:
    - `decisions.md` — 시도 → 결과 → 결정. 상태 태그: `[active]`, `[rejected]`, `[superseded]`, `[uncertain]`
-   - `anti-patterns.md` — "이것은 하지 마라" 목록과 이유
+   - `anti-patterns.md` — 피해야 할 패턴과 그 이유 목록
    - `troubleshooting.md` — 에러 메시지 ↔ 해결책 매핑
    - `index.md` — 전체 요약 + 키워드 인덱스
-5. Merge with existing knowledge (don't overwrite, append/update)
+5. 기존 knowledge 파일을 읽은 뒤 새 항목을 추가하거나 기존 항목을 업데이트하여 병합하라
 
 **During research (Step 3):** Also search `.knowledge/knowledge/` for findings relevant to this phase. Especially check:
-- `decisions.md` — `[rejected]` 항목은 같은 접근 시도 금지
-- `anti-patterns.md` — 연구 추천에서 제외할 패턴
-- `troubleshooting.md` — 이미 해결된 문제는 재조사 불필요
+- `decisions.md` — `[rejected]` 항목을 확인하고 대안 접근법을 선택하라
+- `anti-patterns.md` — 목록을 확인하고 연구 추천에서 검증된 패턴을 우선 적용하라
+- `troubleshooting.md` — 이미 해결된 문제를 확인하고 새로운 미해결 문제에 집중하라
