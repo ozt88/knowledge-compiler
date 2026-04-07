@@ -24,7 +24,10 @@
   1. gsd-phase-researcher.patch.md의 Step 0 컴파일러 프롬프트가 "~하지 마라" 형식 없이 긍정형 지시만 포함한다
   2. gsd-verifier.patch.md의 Step 10b 컴파일러 프롬프트가 "~하지 마라" 형식 없이 긍정형 지시만 포함한다
   3. 두 패치 모두 기존 컴파일 결과 구조(index.md, decisions.md, anti-patterns.md, troubleshooting.md)를 그대로 유지한다
-**Plans**: TBD
+**Plans:** 1 plan
+
+Plans:
+- [ ] 01-01-PLAN.md — researcher/verifier 패치 파일 부정형 지시를 긍정형으로 전환
 
 ### Phase 2: Knowledge Format System
 **Goal**: guardrails.md가 도입되고 anti-patterns.md가 맥락 의존형 형식으로 재정의된다
@@ -52,6 +55,6 @@
 
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
-| 1. Compiler Prompt Refactor | v1.1 | 0/TBD | Not started | - |
+| 1. Compiler Prompt Refactor | v1.1 | 0/1 | Not started | - |
 | 2. Knowledge Format System | v1.1 | 0/TBD | Not started | - |
 | 3. Collection Instruction Refactor | v1.1 | 0/TBD | Not started | - |
