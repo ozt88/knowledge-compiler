@@ -2,8 +2,8 @@
 phase: 2
 slug: knowledge-format-system
 status: draft
-nyquist_compliant: false
-wave_0_complete: false
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-04-07
 ---
 
@@ -19,15 +19,15 @@ created: 2026-04-07
 |----------|-------|
 | **Framework** | none — prompt text verification (grep/read) |
 | **Config file** | none |
-| **Quick run command** | `grep -E "(guardrails\.md|anti-patterns\.md)" src/compiler-prompt.md` |
-| **Full suite command** | `grep -c "guardrails" src/compiler-prompt.md && grep -c "관찰" src/compiler-prompt.md` |
+| **Quick run command** | `grep -E "(guardrails\.md\|anti-patterns\.md)" patches/gsd-phase-researcher.patch.md patches/gsd-verifier.patch.md` |
+| **Full suite command** | `grep -c "guardrails" patches/gsd-phase-researcher.patch.md patches/gsd-verifier.patch.md && grep -c "관찰" patches/gsd-phase-researcher.patch.md patches/gsd-verifier.patch.md` |
 | **Estimated runtime** | ~2 seconds |
 
 ---
 
 ## Sampling Rate
 
-- **After every task commit:** Run `grep -E "(guardrails\.md|anti-patterns\.md)" src/compiler-prompt.md`
+- **After every task commit:** Run `grep -E "(guardrails\.md|anti-patterns\.md)" patches/gsd-phase-researcher.patch.md patches/gsd-verifier.patch.md`
 - **After every plan wave:** Run full grep suite
 - **Before `/gsd:verify-work`:** All grep checks must pass
 - **Max feedback latency:** 5 seconds
@@ -38,12 +38,8 @@ created: 2026-04-07
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 2-01-01 | 01 | 1 | COMPILE-03 | grep | `grep "guardrails.md" src/researcher-patch.md` | ✅ | ⬜ pending |
-| 2-01-02 | 01 | 1 | COMPILE-04 | grep | `grep "긍정형\|~경유 필수\|~사용" src/researcher-patch.md` | ✅ | ⬜ pending |
-| 2-01-03 | 01 | 1 | COMPILE-05 | grep | `grep "관찰-이유-대신\|맥락 의존" src/researcher-patch.md` | ✅ | ⬜ pending |
-| 2-02-01 | 02 | 1 | COMPILE-03 | grep | `grep "guardrails.md" src/verifier-patch.md` | ✅ | ⬜ pending |
-| 2-02-02 | 02 | 1 | COMPILE-04 | grep | `grep "긍정형\|~경유 필수\|~사용" src/verifier-patch.md` | ✅ | ⬜ pending |
-| 2-02-03 | 02 | 1 | COMPILE-05 | grep | `grep "관찰-이유-대신\|맥락 의존" src/verifier-patch.md` | ✅ | ⬜ pending |
+| 2-01-01 | 01 | 1 | COMPILE-03, COMPILE-04, COMPILE-05 | grep | `grep -c "guardrails.md" patches/gsd-phase-researcher.patch.md && grep "긍정형\|경유 필수\|방식 사용" patches/gsd-phase-researcher.patch.md && grep "관찰-이유-대신\|맥락 의존" patches/gsd-phase-researcher.patch.md` | ✅ | ⬜ pending |
+| 2-01-02 | 01 | 1 | COMPILE-03, COMPILE-04, COMPILE-05 | grep | `grep -c "guardrails.md" patches/gsd-verifier.patch.md && grep "긍정형\|경유 필수\|방식 사용" patches/gsd-verifier.patch.md && grep "관찰-이유-대신\|맥락 의존" patches/gsd-verifier.patch.md` | ✅ | ⬜ pending |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -66,11 +62,11 @@ created: 2026-04-07
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 5s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 5s
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** approved
