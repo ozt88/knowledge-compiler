@@ -27,7 +27,7 @@
 **Plans:** 1 plan
 
 Plans:
-- [ ] 01-01-PLAN.md — researcher/verifier 패치 파일 부정형 지시를 긍정형으로 전환
+- [x] 01-01-PLAN.md — researcher/verifier 패치 파일 부정형 지시를 긍정형으로 전환
 
 ### Phase 2: Knowledge Format System
 **Goal**: guardrails.md가 도입되고 anti-patterns.md가 맥락 의존형 형식으로 재정의된다
