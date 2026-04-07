@@ -43,18 +43,18 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| COMPILE-01 | — | Pending |
-| COMPILE-02 | — | Pending |
-| COMPILE-03 | — | Pending |
-| COMPILE-04 | — | Pending |
-| COMPILE-05 | — | Pending |
-| COLLECT-01 | — | Pending |
+| COMPILE-01 | Phase 1 | Pending |
+| COMPILE-02 | Phase 1 | Pending |
+| COMPILE-03 | Phase 2 | Pending |
+| COMPILE-04 | Phase 2 | Pending |
+| COMPILE-05 | Phase 2 | Pending |
+| COLLECT-01 | Phase 3 | Pending |
 
 **Coverage:**
 - v1.1 requirements: 6 total
-- Mapped to phases: 0 (roadmap pending)
-- Unmapped: 6 ⚠️
+- Mapped to phases: 6
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-07*
-*Last updated: 2026-04-07 after initial definition*
+*Last updated: 2026-04-07 — traceability mapped after roadmap creation*
