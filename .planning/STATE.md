@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Positive Prompt Refactor
-status: Ready to plan
-stopped_at: Roadmap 작성 완료, Phase 1 planning 대기 중
-last_updated: "2026-04-07T04:52:20.479Z"
+status: Phase complete — ready for verification
+stopped_at: Completed 02-knowledge-format-system-01-PLAN.md
+last_updated: "2026-04-08T01:23:19.134Z"
 progress:
   total_phases: 3
-  completed_phases: 1
-  total_plans: 1
-  completed_plans: 1
+  completed_phases: 2
+  total_plans: 2
+  completed_plans: 2
 ---
 
 # Project State
@@ -19,12 +19,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-07)
 
 **Core value:** GSD 서브에이전트가 과거 세션의 시도와 결정에 접근하여 같은 실수를 반복하지 않는 것.
-**Current focus:** Phase 01 — compiler-prompt-refactor
+**Current focus:** Phase 02 — knowledge-format-system
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
+Phase: 02 (knowledge-format-system) — EXECUTING
+Plan: 1 of 1
 
 ## Performance Metrics
 
@@ -41,6 +41,7 @@ By Phase:
 | -       | -     | -     | -        |
 
 Updated after each plan completion.
+| Phase 02-knowledge-format-system P01 | 3 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -51,6 +52,8 @@ Recent decisions affecting current work:
 
 - v1.0: anti-patterns.md "하지 마라" 형식 — MVP 우선, v1.1에서 긍정형 전환 예정 (Revisit)
 - v1.1: guardrails.md 신규 도입, anti-patterns.md는 완전 제거 아닌 형식 재정의로 결정
+- [Phase 02-knowledge-format-system]: 마이그레이션 완료 후 guardrails.md 신규 생성 + anti-patterns.md 덮어쓰기 (원본 보존 없음, D-06)
+- [Phase 02-knowledge-format-system]: 두 패치의 핵심 형식 지시 블록은 동일하되 troubleshooting/index 설명은 verifier 고유 표현 유지 (D-08)
 
 ### Pending Todos
 
@@ -62,6 +65,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-07
-Stopped at: Roadmap 작성 완료, Phase 1 planning 대기 중
+Last session: 2026-04-08T01:23:19.132Z
+Stopped at: Completed 02-knowledge-format-system-01-PLAN.md
 Resume file: None

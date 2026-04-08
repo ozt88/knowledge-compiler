@@ -10,9 +10,9 @@
 
 - [ ] **COMPILE-01**: researcher가 incremental 컴파일 시 긍정형 지시로 knowledge 파일을 생성한다
 - [ ] **COMPILE-02**: verifier가 full reconcile 시 긍정형 지시로 knowledge 파일을 재구성한다
-- [ ] **COMPILE-03**: 컴파일러가 guardrails.md를 신규 생성하고, 기존 anti-patterns.md가 존재하면 읽어서 변환 후 반영한다
-- [ ] **COMPILE-04**: guardrails.md는 절대적/대안 있는 케이스를 긍정형 액션("~경유 필수", "~사용")으로 기술한다
-- [ ] **COMPILE-05**: anti-patterns.md는 맥락 의존적 케이스를 원인-결과형(관찰 → 이유 → 대신)으로 기술한다
+- [x] **COMPILE-03**: 컴파일러가 guardrails.md를 신규 생성하고, 기존 anti-patterns.md가 존재하면 읽어서 변환 후 반영한다
+- [x] **COMPILE-04**: guardrails.md는 절대적/대안 있는 케이스를 긍정형 액션("~경유 필수", "~사용")으로 기술한다
+- [x] **COMPILE-05**: anti-patterns.md는 맥락 의존적 케이스를 원인-결과형(관찰 → 이유 → 대신)으로 기술한다
 
 ### COLLECT — 수집 지시
 
@@ -45,9 +45,9 @@
 |-------------|-------|--------|
 | COMPILE-01 | Phase 1 | Pending |
 | COMPILE-02 | Phase 1 | Pending |
-| COMPILE-03 | Phase 2 | Pending |
-| COMPILE-04 | Phase 2 | Pending |
-| COMPILE-05 | Phase 2 | Pending |
+| COMPILE-03 | Phase 2 | Complete |
+| COMPILE-04 | Phase 2 | Complete |
+| COMPILE-05 | Phase 2 | Complete |
 | COLLECT-01 | Phase 3 | Pending |
 
 **Coverage:**
