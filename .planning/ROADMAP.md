@@ -12,7 +12,7 @@
 
 - [ ] **Phase 1: Compiler Prompt Refactor** - researcher/verifier 패치 파일의 컴파일러 프롬프트를 긍정형으로 전환
 - [x] **Phase 2: Knowledge Format System** - guardrails.md 신규 도입 및 anti-patterns.md 형식을 원인-결과형으로 재정의 (completed 2026-04-08)
-- [ ] **Phase 3: Collection Instruction Refactor** - CLAUDE.md 턴 수집 지시의 부정형 규칙을 긍정형으로 전환
+- [x] **Phase 3: Collection Instruction Refactor** - CLAUDE.md 턴 수집 지시의 부정형 규칙을 긍정형으로 전환 (completed 2026-04-08)
 
 ## Phase Details
 
@@ -51,10 +51,10 @@ Plans:
   1. templates/claude-md-section.md의 수집 규칙에서 "포함하지 않을 것" 항목이 제거되고 긍정형 지시로 대체된다
   2. 전환된 지시가 동일한 수집 의도(코드 전문/개인정보/도구 호출 세부사항 제외)를 긍정 표현으로 달성한다
   3. CLAUDE.md 글로벌 지시에도 동일한 긍정형 전환이 반영된다
-**Plans:** 1 plan
+**Plans:** 1/1 plans complete
 
 Plans:
-- [ ] 03-01-PLAN.md — 턴 수집 규칙 부정형 삭제 및 규칙 3 긍정형 세밀화, CLAUDE.md 동기화
+- [x] 03-01-PLAN.md — 턴 수집 규칙 부정형 삭제 및 규칙 3 긍정형 세밀화, CLAUDE.md 동기화
 
 ## Progress
 
@@ -62,4 +62,4 @@ Plans:
 |-------|-----------|----------------|--------|-----------|
 | 1. Compiler Prompt Refactor | v1.1 | 1/1 | Complete | 2026-04-07 |
 | 2. Knowledge Format System | v1.1 | 1/1 | Complete   | 2026-04-08 |
-| 3. Collection Instruction Refactor | v1.1 | 0/1 | Planning complete | - |
+| 3. Collection Instruction Refactor | v1.1 | 1/1 | Complete   | 2026-04-08 |

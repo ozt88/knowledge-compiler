@@ -16,7 +16,7 @@
 
 ### COLLECT — 수집 지시
 
-- [ ] **COLLECT-01**: CLAUDE.md 턴 수집 지시의 부정형 규칙("포함하지 않을 것")을 긍정형으로 전환한다
+- [x] **COLLECT-01**: CLAUDE.md 턴 수집 지시의 부정형 규칙("포함하지 않을 것")을 긍정형으로 전환한다
 
 ## v2 Requirements
 
@@ -48,7 +48,7 @@
 | COMPILE-03 | Phase 2 | Complete |
 | COMPILE-04 | Phase 2 | Complete |
 | COMPILE-05 | Phase 2 | Complete |
-| COLLECT-01 | Phase 3 | Pending |
+| COLLECT-01 | Phase 3 | Complete |
 
 **Coverage:**
 - v1.1 requirements: 6 total
