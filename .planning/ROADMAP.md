@@ -56,6 +56,25 @@ Plans:
 Plans:
 - [x] 03-01-PLAN.md — 턴 수집 규칙 부정형 삭제 및 규칙 3 긍정형 세밀화, CLAUDE.md 동기화
 
+## Backlog
+
+### Phase 999.1: PageIndex Integration — Knowledge Search Layer (BACKLOG)
+
+**Goal:** .knowledge/knowledge/*.md 파일을 PageIndex(Vectorless RAG)로 인덱싱해 researcher/verifier 에이전트가 전체 파일 로드 대신 targeted 쿼리로 관련 knowledge를 조회한다
+**Requirements:** TBD
+**Plans:** 0 plans
+
+Context:
+
+- PageIndex repo: [VectifyAI/PageIndex](https://github.com/VectifyAI/PageIndex)
+- MCP 서버 연동으로 Claude Code 에이전트가 직접 쿼리 가능
+- Markdown 모드: 헤딩(`##`, `###`) 기반 계층 트리 → knowledge 파일 구조와 호환
+- 적용 시점: 지식이 충분히 축적된 v1.x 이후 검토
+
+Plans:
+
+- [ ] TBD (promote with /gsd:review-backlog when ready)
+
 ## Progress
 
 | Phase | Milestone | Plans Complete | Status | Completed |
