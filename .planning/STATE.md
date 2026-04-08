@@ -58,6 +58,10 @@ Recent decisions affecting current work:
 - [Phase 03-collection-instruction-refactor]: 부정형 규칙 삭제 — Pink Elephant Problem 해소 (포함하지 않을 것 → 수행한 행동과 그 결과 긍정형 전환)
 - [Phase 03-collection-instruction-refactor]: template이 source of truth — CLAUDE.md는 template 내용으로 동기화
 
+### Roadmap Evolution
+
+- Phase 4 added: Knowledge Importance Prioritization — raw 데이터 중 중요한 지식 판별 메커니즘 탐색
+
 ### Pending Todos
 
 None yet.

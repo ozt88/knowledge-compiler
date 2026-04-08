@@ -82,3 +82,19 @@ Plans:
 | 1. Compiler Prompt Refactor | v1.1 | 1/1 | Complete | 2026-04-07 |
 | 2. Knowledge Format System | v1.1 | 1/1 | Complete   | 2026-04-08 |
 | 3. Collection Instruction Refactor | v1.1 | 1/1 | Complete   | 2026-04-08 |
+
+### Phase 4: Knowledge Importance Prioritization
+
+**Goal:** raw 데이터로 저장된 지식 중 어떤 것이 더 중요한지 판별하고 우선순위를 매기는 메커니즘을 도입한다
+**Depends on:** Phase 3
+**Requirements**: TBD
+**Plans:** 0 plans
+
+Context:
+
+- 현재 raw 데이터는 요청/결과 형태로 동등하게 저장됨
+- 중요도 판별 기준 탐색 필요: 빈도, 결과 영향도, 참조 횟수 등
+
+Plans:
+
+- [ ] TBD (run /gsd:plan-phase 4 to break down)
