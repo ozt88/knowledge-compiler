@@ -51,7 +51,10 @@ Plans:
   1. templates/claude-md-section.md의 수집 규칙에서 "포함하지 않을 것" 항목이 제거되고 긍정형 지시로 대체된다
   2. 전환된 지시가 동일한 수집 의도(코드 전문/개인정보/도구 호출 세부사항 제외)를 긍정 표현으로 달성한다
   3. CLAUDE.md 글로벌 지시에도 동일한 긍정형 전환이 반영된다
-**Plans**: TBD
+**Plans:** 1 plan
+
+Plans:
+- [ ] 03-01-PLAN.md — 턴 수집 규칙 부정형 삭제 및 규칙 3 긍정형 세밀화, CLAUDE.md 동기화
 
 ## Progress
 
@@ -59,4 +62,4 @@ Plans:
 |-------|-----------|----------------|--------|-----------|
 | 1. Compiler Prompt Refactor | v1.1 | 1/1 | Complete | 2026-04-07 |
 | 2. Knowledge Format System | v1.1 | 1/1 | Complete   | 2026-04-08 |
-| 3. Collection Instruction Refactor | v1.1 | 0/TBD | Not started | - |
+| 3. Collection Instruction Refactor | v1.1 | 0/1 | Planning complete | - |
