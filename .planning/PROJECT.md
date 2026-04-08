@@ -31,7 +31,7 @@ GSD 서브에이전트(planner, researcher)가 과거 세션의 시도와 결정
 
 - [x] researcher/verifier 컴파일러 프롬프트 긍정형 전환 (Pink Elephant Problem 대응) — Validated in Phase 01: compiler-prompt-refactor
 - [x] knowledge/ 파일 형식 재구성 — guardrails.md(긍정형 절대 케이스) + anti-patterns.md(관찰-이유-대신 맥락 케이스) 이중 구조 도입 — Validated in Phase 02: knowledge-format-system
-- [ ] CLAUDE.md 턴 수집 규칙 긍정형 전환 (규칙 4 "포함하지 않을 것" → 긍정형)
+- [x] CLAUDE.md 턴 수집 규칙 긍정형 전환 (규칙 4 "포함하지 않을 것" → 긍정형) — Validated in Phase 03: collection-instruction-refactor
 - [ ] 변경 전후 품질 검증 방법 정의
 
 ### Out of Scope
@@ -85,4 +85,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-08 — Phase 02 complete (guardrails.md 도입 + anti-patterns.md 관찰-이유-대신 형식 재정의)*
+*Last updated: 2026-04-08 — Phase 03 complete (CLAUDE.md 턴 수집 규칙 4 삭제, 규칙 3 긍정형 세밀화, CLAUDE.md 동기화)*
