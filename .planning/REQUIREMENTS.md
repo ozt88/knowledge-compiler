@@ -18,6 +18,13 @@
 
 - [x] **COLLECT-01**: CLAUDE.md 턴 수집 지시의 부정형 규칙("포함하지 않을 것")을 긍정형으로 전환한다
 
+### RELEVANCE — 지식 관련성 접근
+
+- [ ] **RELEVANCE-01**: 컴파일러 지시에 raw 항목 선별 기준(포함/건너뛰기)이 명시되어 일회성 항목이 knowledge에서 제외된다
+- [ ] **RELEVANCE-02**: index.md 형식 지시에 Quick Reference 테이블(주제 → 파일 → 핵심 항목)이 포함되어 쿼리 안내 역할을 한다
+- [ ] **RELEVANCE-03**: 에이전트 접근 지시가 index-first 패턴(index.md 먼저 읽고 관련 파일만 선택 Read)을 명시한다
+- [ ] **RELEVANCE-04**: researcher 패치와 verifier 패치의 선별 기준 및 index.md 형식 블록이 동일하다 (D-08 패턴)
+
 ## v2 Requirements
 
 ### LINT — 자동 검증
@@ -38,6 +45,10 @@
 | Exploration Phase 타입 도입 | v1.1 범위 초과 |
 | 점진적 컴파일 최적화 | 성능 문제 발생 시 고려 |
 | anti-patterns.md 완전 제거 | 맥락 의존적 케이스는 유지 필요 |
+| BM25/TF-IDF 완전 구현 | Read/Grep 제약 위반 (D-05) |
+| 벡터 임베딩 검색 | 명시적 Out of Scope (D-05) |
+| 수동 중요도 마킹 | 저장 시점 마킹 금지 (D-03) |
+| PageIndex MCP 연동 | Backlog Phase 999.1 — v1.x 이후 검토 |
 
 ## Traceability
 
@@ -49,12 +60,16 @@
 | COMPILE-04 | Phase 2 | Complete |
 | COMPILE-05 | Phase 2 | Complete |
 | COLLECT-01 | Phase 3 | Complete |
+| RELEVANCE-01 | Phase 4 | Pending |
+| RELEVANCE-02 | Phase 4 | Pending |
+| RELEVANCE-03 | Phase 4 | Pending |
+| RELEVANCE-04 | Phase 4 | Pending |
 
 **Coverage:**
-- v1.1 requirements: 6 total
-- Mapped to phases: 6
+- v1.1 requirements: 10 total
+- Mapped to phases: 10
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-07*
-*Last updated: 2026-04-07 — traceability mapped after roadmap creation*
+*Last updated: 2026-04-09 — RELEVANCE requirements added for Phase 4*

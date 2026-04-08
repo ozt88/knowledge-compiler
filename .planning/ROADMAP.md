@@ -56,6 +56,20 @@ Plans:
 Plans:
 - [x] 03-01-PLAN.md — 턴 수집 규칙 부정형 삭제 및 규칙 3 긍정형 세밀화, CLAUDE.md 동기화
 
+### Phase 4: Knowledge Importance Prioritization
+**Goal**: 컴파일러가 raw 항목의 지식 가치를 판별하여 선별 포함하고, 에이전트가 index-first 접근으로 관련 knowledge를 효율적으로 조회한다
+**Depends on**: Phase 3
+**Requirements**: RELEVANCE-01, RELEVANCE-02, RELEVANCE-03, RELEVANCE-04
+**Success Criteria** (what must be TRUE):
+  1. 컴파일러 지시에 raw 항목 선별 기준(포함하는 항목 + 건너뛰는 항목)이 명시된다
+  2. index.md 형식 지시에 Quick Reference 테이블(주제 → 파일 매핑)이 포함된다
+  3. 에이전트 접근 지시가 index-first 패턴을 명시한다
+  4. researcher 패치와 verifier 패치의 선별 기준 블록이 동일하다 (D-08)
+**Plans:** 1 plan
+
+Plans:
+- [ ] 04-01-PLAN.md — 두 패치에 선별 기준 + index.md 쿼리 안내 형식 + index-first 접근 지시 추가
+
 ## Backlog
 
 ### Phase 999.1: PageIndex Integration — Knowledge Search Layer (BACKLOG)
@@ -82,19 +96,4 @@ Plans:
 | 1. Compiler Prompt Refactor | v1.1 | 1/1 | Complete | 2026-04-07 |
 | 2. Knowledge Format System | v1.1 | 1/1 | Complete   | 2026-04-08 |
 | 3. Collection Instruction Refactor | v1.1 | 1/1 | Complete   | 2026-04-08 |
-
-### Phase 4: Knowledge Importance Prioritization
-
-**Goal:** raw 데이터로 저장된 지식 중 어떤 것이 더 중요한지 판별하고 우선순위를 매기는 메커니즘을 도입한다
-**Depends on:** Phase 3
-**Requirements**: TBD
-**Plans:** 0 plans
-
-Context:
-
-- 현재 raw 데이터는 요청/결과 형태로 동등하게 저장됨
-- 중요도 판별 기준 탐색 필요: 빈도, 결과 영향도, 참조 횟수 등
-
-Plans:
-
-- [ ] TBD (run /gsd:plan-phase 4 to break down)
+| 4. Knowledge Importance Prioritization | v1.1 | 0/1 | Planned | — |
