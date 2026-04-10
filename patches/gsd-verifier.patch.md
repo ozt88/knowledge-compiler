@@ -11,9 +11,15 @@ After writing VERIFICATION.md, reconcile project knowledge from this phase's lea
 
 **If raw/ exists:**
 
-1. Read all `.knowledge/raw/*.md` files
-2. Read existing `.knowledge/knowledge/` files (if any)
-3. Full reconcile — reprocess ALL raw entries and rebuild knowledge/:
+1. Read `.knowledge/knowledge/index.md` and extract the `Last compiled` date (YYYY-MM-DD format).
+   - If index.md does not exist or has no "Last compiled" line, treat as first compile (process ALL raw files).
+2. List `.knowledge/raw/*.md` files. Filter to only files with filename date >= the "Last compiled" date.
+   - Filename pattern: `YYYY-MM-DD.md`. Compare the date portion with "Last compiled" date.
+   - **If no files are newer than "Last compiled" date: skip Step 10b raw processing entirely** (log "No new raw entries since {date}, skipping compile").
+3. Read only the filtered (newer) raw files.
+4. Check if `.knowledge/knowledge/` exists. If not, create it.
+5. Read existing knowledge files (if any): `decisions.md`, `anti-patterns.md`, `troubleshooting.md`, `index.md`
+6. Compile new raw entries into knowledge/ structure:
 
    **Raw entry selection criteria — included in knowledge:**
    - Decisions or technical findings that prevent the same mistake in future sessions
@@ -52,6 +58,8 @@ After writing VERIFICATION.md, reconcile project knowledge from this phase's lea
      - Alternative is fixed → rewrite to `guardrails.md` as a positive action
      - Varies by context → reformat in `anti-patterns.md` using Observation-Reason-Instead structure
    - After migration, create `guardrails.md` and overwrite `anti-patterns.md` with the new format
+7. After reading existing knowledge files, add new entries or update existing entries to merge them.
+
    **Conflict detection:** When a new raw entry contradicts an existing knowledge entry (opposite conclusion, reversed decision, etc.):
    - Do NOT overwrite the existing entry.
    - Append a `[conflict: YYYY-MM-DD]` tag to the entry heading (where YYYY-MM-DD is today's date).
@@ -72,9 +80,8 @@ After writing VERIFICATION.md, reconcile project knowledge from this phase's lea
      **Observed:** 2 times (2026-04-08, 2026-04-10)
      ```
 
-4. If conflicting `[active]` decisions exist, mark them `[uncertain]`
-
-**This is a FULL reconcile** (not incremental like Step 0 in researcher). This is the phase completion point, so revalidate overall consistency.
+8. If conflicting `[active]` decisions exist, mark them `[uncertain]`
+9. Update `index.md`: set `Last compiled` to today's date (YYYY-MM-DD), update `Total entries` count.
 
 **knowledge/ usage instruction (from the index.md generated in Step 10b):**
 When an agent queries knowledge/, read index.md first to identify relevant files, then selectively Read only those files.
