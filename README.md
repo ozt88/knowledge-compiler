@@ -12,7 +12,7 @@ GSD로 탐색적 작업(인게임 검증, 디버깅 등) 중 발생한 학습이
 ```
 매 턴 → .knowledge/raw/ 에 자동 수집 (CLAUDE.md 행동 지시)
 Phase 계획 시작 → researcher가 raw/ → knowledge/ incremental compile
-Phase 검증 완료 → verifier가 knowledge/ full reconcile
+Phase 검증 완료 → verifier가 raw/ incremental compile + knowledge lint
 다음 Phase → researcher가 knowledge/ 참조하여 과거 실수 회피
 ```
 
@@ -53,7 +53,7 @@ knowledge-compiler/
 ├── install.sh                              # 설치 스크립트
 ├── patches/
 │   ├── gsd-phase-researcher.patch.md       # researcher Step 0: incremental compile
-│   └── gsd-verifier.patch.md               # verifier Step 10b: full reconcile
+│   └── gsd-verifier.patch.md               # verifier Step 10b/10c: incr. + lint
 ├── templates/
 │   ├── claude-md-section.md                # CLAUDE.md에 추가할 턴 수집 지시
 │   └── .knowledge/                         # 프로젝트 디렉토리 구조 템플릿
@@ -68,8 +68,9 @@ knowledge-compiler/
 |------|------|
 | `index.md` | 전체 요약 + 키워드 인덱스 |
 | `decisions.md` | 시도 → 결과 → 결정 (`[active]`, `[rejected]`, `[superseded]`, `[uncertain]`) |
-| `anti-patterns.md` | "이것은 하지 마라" 목록과 이유 |
+| `anti-patterns.md` | 맥락 의존형 접근법 (Observation-Reason-Instead 형식) |
 | `troubleshooting.md` | 에러 메시지 ↔ 해결책 매핑 |
+| `guardrails.md` | 대안이 단일 선택으로 고정된 경우 — 긍정형 행동 지시 |
 
 ## 요구사항
 
