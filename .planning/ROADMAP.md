@@ -6,7 +6,7 @@
 
 ## Phases
 
-### v1.1 Positive Prompt Refactor (In Progress)
+### v1.1 Positive Prompt Refactor (Complete)
 
 **Milestone Goal:** 수집·컴파일·knowledge 파일 생성 전반의 프롬프트를 긍정형으로 전환해 준수율과 knowledge 품질 향상
 
@@ -68,7 +68,7 @@ Plans:
 **Plans:** 1 plan
 
 Plans:
-- [ ] 04-01-PLAN.md — 두 패치에 선별 기준 + index.md 쿼리 안내 형식 + index-first 접근 지시 추가
+- [x] 04-01-PLAN.md — 두 패치에 선별 기준 + index.md 쿼리 안내 형식 + index-first 접근 지시 추가
 
 ## Backlog
 
@@ -96,4 +96,4 @@ Plans:
 | 1. Compiler Prompt Refactor | v1.1 | 1/1 | Complete | 2026-04-07 |
 | 2. Knowledge Format System | v1.1 | 1/1 | Complete   | 2026-04-08 |
 | 3. Collection Instruction Refactor | v1.1 | 1/1 | Complete   | 2026-04-08 |
-| 4. Knowledge Importance Prioritization | v1.1 | 0/1 | Planned | — |
+| 4. Knowledge Importance Prioritization | v1.1 | 1/1 | Complete | 2026-04-10 |
