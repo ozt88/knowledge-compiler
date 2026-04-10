@@ -1,17 +1,20 @@
 #!/bin/bash
 # Knowledge Compiler installer for GSD
-# Usage: ./install.sh [--project /path/to/project]
+# Usage: ./install.sh [--project /path/to/project] [--force]
 #
 # What it does:
 #   1. Patches ~/.claude/agents/gsd-phase-researcher.md (Step 0: incremental compile)
 #   2. Patches ~/.claude/agents/gsd-verifier.md (Step 10b: full reconcile)
 #   3. Optionally sets up a project with .knowledge/ and CLAUDE.md section
+#
+# --force: Remove existing patch and re-apply (use after updating patch files)
 
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AGENTS_DIR="$HOME/.claude/agents"
 PATCH_MARKER="PATCH:knowledge-compiler"
+FORCE=false
 
 # Colors
 GREEN='\033[0;32m'
@@ -24,6 +27,31 @@ warn()  { echo -e "${YELLOW}[!]${NC} $1"; }
 error() { echo -e "${RED}[✗]${NC} $1"; }
 
 # --- Agent patching ---
+
+# Remove existing patch block between two markers from an agent file
+unpatch_agent() {
+    local agent_file="$1"
+    local agent_name
+    agent_name="$(basename "$agent_file")"
+
+    if ! grep -q "$PATCH_MARKER" "$agent_file" 2>/dev/null; then
+        return 0
+    fi
+
+    # Find the patch block: starts at the line containing the section header
+    # immediately before the marker, ends at the next top-level ## heading
+    # Strategy: remove lines from "## Step 0:" or "## Step 10b:" up to (but not
+    # including) the next "## Step " heading that does NOT contain PATCH_MARKER.
+    local tmp_file
+    tmp_file="$(mktemp)"
+    awk '
+        /## Step 0: Knowledge Compile|## Step 10b: Knowledge Reconcile/ { skip=1 }
+        skip && /^## / && !/Knowledge Compile|Knowledge Reconcile/ { skip=0 }
+        !skip { print }
+    ' "$agent_file" > "$tmp_file"
+    mv "$tmp_file" "$agent_file"
+    warn "$agent_name existing patch removed (--force)"
+}
 
 patch_agent() {
     local agent_file="$1"
@@ -38,8 +66,12 @@ patch_agent() {
     fi
 
     if grep -q "$PATCH_MARKER" "$agent_file" 2>/dev/null; then
-        warn "$agent_name already patched — skipping"
-        return 0
+        if [ "$FORCE" = true ]; then
+            unpatch_agent "$agent_file"
+        else
+            warn "$agent_name already patched — skipping (use --force to re-apply)"
+            return 0
+        fi
     fi
 
     # Extract patch content (skip first 2 comment lines)
@@ -57,6 +89,16 @@ patch_agent() {
     mv "$tmp_file" "$agent_file"
     info "$agent_name patched"
 }
+
+# --- Parse arguments ---
+PROJECT_DIR=""
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --project) PROJECT_DIR="$2"; shift 2 ;;
+        --force) FORCE=true; shift ;;
+        *) shift ;;
+    esac
+done
 
 echo "=== Knowledge Compiler Installer ==="
 echo ""
@@ -83,14 +125,6 @@ patch_agent \
 echo ""
 
 # --- Project setup (optional) ---
-
-PROJECT_DIR=""
-while [[ $# -gt 0 ]]; do
-    case "$1" in
-        --project) PROJECT_DIR="$2"; shift 2 ;;
-        *) shift ;;
-    esac
-done
 
 if [ -n "$PROJECT_DIR" ]; then
     echo "--- Setting up project: $PROJECT_DIR ---"
