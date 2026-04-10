@@ -75,6 +75,7 @@ None yet.
 | #          | Description              | Date       | Commit  | Directory                                                    |
 |------------|--------------------------|------------|---------|--------------------------------------------------------------|
 | 260410-hyj | patch.md 영어로 변경하자 | 2026-04-10 | 5c1d03f | [260410-hyj-patch-md](.planning/quick/260410-hyj-patch-md/) |
+| 260410-ib0 | researcher/verifier 패치 파일 개선: 증분 컴파일 + 충돌/강화 감지 규칙 추가 | 2026-04-10 | 43279f6 | [260410-ib0-researcher-verifier](.planning/quick/260410-ib0-researcher-verifier/) |
 
 ## Session Continuity
 
