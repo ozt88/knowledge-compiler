@@ -77,9 +77,10 @@ None yet.
 | 260410-hyj | patch.md 영어로 변경하자 | 2026-04-10 | 5c1d03f | [260410-hyj-patch-md](.planning/quick/260410-hyj-patch-md/) |
 | 260410-ib0 | researcher/verifier 패치 파일 개선: 증분 컴파일 + 충돌/강화 감지 규칙 추가 | 2026-04-10 | 43279f6 | [260410-ib0-researcher-verifier](.planning/quick/260410-ib0-researcher-verifier/) |
 | 260410-ijc | verifier Step 10b 증분 컴파일 전환 — full reconcile → Last compiled 기반 incremental | 2026-04-10 | 9a22f23 | [260410-ijc-verifier-step-10b-full-reconcile-researc](.planning/quick/260410-ijc-verifier-step-10b-full-reconcile-researc/) |
+| 260410-ir8 | verifier Step 10b 턴 수 일치 체크 + Stage 3 Knowledge Lint 구현 | 2026-04-10 | b7ff42a | [260410-ir8-verifier-step-10b-stage-3-lint](.planning/quick/260410-ir8-verifier-step-10b-stage-3-lint/) |
 
 ## Session Continuity
 
-Last session: 2026-04-10T04:15:47.612Z
-Stopped at: Completed quick 260410-ib0 researcher/verifier incremental compile + conflict/reinforcement rules
+Last session: 2026-04-10T04:30:16.010Z
+Stopped at: Completed quick 260410-ir8 verifier Step 10b turn sanity check + Stage 3 Knowledge Lint
 Resume file: None
