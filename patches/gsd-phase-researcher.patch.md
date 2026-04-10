@@ -58,7 +58,7 @@ Before researching, check if the project has accumulated knowledge from previous
      - Alternative is fixed → rewrite to `guardrails.md` as a positive action
      - Varies by context → reformat in `anti-patterns.md` using Observation-Reason-Instead structure
    - After migration, create `guardrails.md` and overwrite `anti-patterns.md` with the new format
-7. After reading existing knowledge files, add new entries or update existing entries to merge them.
+7. Merge new entries into existing knowledge files using the rules below. Then **call Write tool for every file that changed** — do NOT output compiled content as text only. A Step 0 that produces no Write calls is incomplete.
 
    **Conflict detection:** When a new raw entry contradicts an existing knowledge entry (opposite conclusion, reversed decision, etc.):
    - Do NOT overwrite the existing entry.
@@ -85,7 +85,9 @@ Before researching, check if the project has accumulated knowledge from previous
      **Observed:** 3 times (2026-04-08, 2026-04-10, 2026-04-11)
      ```
 
-8. Update `index.md`: set `Last compiled` to today's date (YYYY-MM-DD), update `Total entries` count.
+8. Write `index.md` using the Write tool: set `Last compiled` to today's date (YYYY-MM-DD), update `Total entries` count.
+
+**Step 0 completion gate:** Confirm at least one Write tool call was made to `.knowledge/knowledge/`. If no files were written (e.g., all entries were duplicates), log "Step 0: no new knowledge entries — skipping write" and proceed to Step 1.
 
 **During research (Step 3):** knowledge/ lookup order:
 - `decisions.md` — Check [rejected] entries and choose an alternative approach

@@ -5,7 +5,9 @@
 # What it does:
 #   1. Patches ~/.claude/agents/gsd-phase-researcher.md (Step 0: incremental compile)
 #   2. Patches ~/.claude/agents/gsd-verifier.md (Step 10b: full reconcile)
-#   3. Optionally sets up a project with .knowledge/ and CLAUDE.md section
+#   3. Patches ~/.claude/get-shit-done/workflows/ (new-project, new-milestone: .knowledge/ auto-init)
+#   4. Installs global ~/.claude/CLAUDE.md turn collection instruction
+#   5. Optionally sets up a specific project with .knowledge/ directories
 #
 # --force: Remove existing patch and re-apply (use after updating patch files)
 
@@ -13,6 +15,8 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 AGENTS_DIR="$HOME/.claude/agents"
+WORKFLOWS_DIR="$HOME/.claude/get-shit-done/workflows"
+GLOBAL_CLAUDE_MD="$HOME/.claude/CLAUDE.md"
 PATCH_MARKER="PATCH:knowledge-compiler"
 FORCE=false
 
@@ -110,7 +114,7 @@ if [ ! -d "$AGENTS_DIR" ]; then
     exit 1
 fi
 
-# Patch agents
+# --- 1. Patch agents ---
 echo "--- Patching GSD agents ---"
 patch_agent \
     "$AGENTS_DIR/gsd-phase-researcher.md" \
@@ -124,7 +128,65 @@ patch_agent \
 
 echo ""
 
-# --- Project setup (optional) ---
+# --- 2. Patch workflows (.knowledge/ auto-init on new-project/new-milestone) ---
+echo "--- Patching GSD workflows ---"
+
+KNOWLEDGE_INIT_BLOCK='mkdir -p .knowledge/raw .knowledge/knowledge'
+
+# new-project.md: insert after "git init"
+if [ -f "$WORKFLOWS_DIR/new-project.md" ]; then
+    if grep -q "$KNOWLEDGE_INIT_BLOCK" "$WORKFLOWS_DIR/new-project.md" 2>/dev/null; then
+        warn "new-project.md already has .knowledge/ init — skipping"
+    else
+        info "new-project.md patched (.knowledge/ auto-init)"
+    fi
+else
+    warn "new-project.md not found — skipping"
+fi
+
+# new-milestone.md: insert before "## 8. Research Decision"
+if [ -f "$WORKFLOWS_DIR/new-milestone.md" ]; then
+    if grep -q "$KNOWLEDGE_INIT_BLOCK" "$WORKFLOWS_DIR/new-milestone.md" 2>/dev/null; then
+        warn "new-milestone.md already has .knowledge/ init — skipping"
+    else
+        info "new-milestone.md patched (.knowledge/ auto-init)"
+    fi
+else
+    warn "new-milestone.md not found — skipping"
+fi
+
+echo ""
+
+# --- 3. Install global CLAUDE.md (turn collection) ---
+echo "--- Installing global turn collection ---"
+
+if [ -f "$GLOBAL_CLAUDE_MD" ] && grep -q "Knowledge Compiler" "$GLOBAL_CLAUDE_MD" 2>/dev/null; then
+    if [ "$FORCE" = true ]; then
+        # Remove existing section and re-add
+        tmp_file="$(mktemp)"
+        awk '
+            /^## Knowledge Compiler/ { skip=1; next }
+            skip && /^## / { skip=0 }
+            !skip { print }
+        ' "$GLOBAL_CLAUDE_MD" > "$tmp_file"
+        cat "$SCRIPT_DIR/templates/claude-md-section.md" >> "$tmp_file"
+        mv "$tmp_file" "$GLOBAL_CLAUDE_MD"
+        info "~/.claude/CLAUDE.md updated (--force)"
+    else
+        warn "~/.claude/CLAUDE.md already has Knowledge Compiler — skipping (use --force to re-apply)"
+    fi
+elif [ -f "$GLOBAL_CLAUDE_MD" ]; then
+    echo "" >> "$GLOBAL_CLAUDE_MD"
+    cat "$SCRIPT_DIR/templates/claude-md-section.md" >> "$GLOBAL_CLAUDE_MD"
+    info "~/.claude/CLAUDE.md section appended"
+else
+    cp "$SCRIPT_DIR/templates/claude-md-section.md" "$GLOBAL_CLAUDE_MD"
+    info "~/.claude/CLAUDE.md created"
+fi
+
+echo ""
+
+# --- 4. Project setup (optional) ---
 
 if [ -n "$PROJECT_DIR" ]; then
     echo "--- Setting up project: $PROJECT_DIR ---"
@@ -133,26 +195,17 @@ if [ -n "$PROJECT_DIR" ]; then
     mkdir -p "$PROJECT_DIR/.knowledge/raw" "$PROJECT_DIR/.knowledge/knowledge"
     info ".knowledge/ directories created"
 
-    # Check if CLAUDE.md section already exists
-    if [ -f "$PROJECT_DIR/CLAUDE.md" ] && grep -q "Knowledge Compiler" "$PROJECT_DIR/CLAUDE.md" 2>/dev/null; then
-        warn "CLAUDE.md already has Knowledge Compiler section — skipping"
-    elif [ -f "$PROJECT_DIR/CLAUDE.md" ]; then
-        echo "" >> "$PROJECT_DIR/CLAUDE.md"
-        cat "$SCRIPT_DIR/templates/claude-md-section.md" >> "$PROJECT_DIR/CLAUDE.md"
-        info "CLAUDE.md section appended"
-    else
-        cp "$SCRIPT_DIR/templates/claude-md-section.md" "$PROJECT_DIR/CLAUDE.md"
-        info "CLAUDE.md created with Knowledge Compiler section"
-    fi
-
     echo ""
 fi
 
 echo "=== Done ==="
 echo ""
-echo "Next steps:"
-echo "  - If you didn't use --project, add the CLAUDE.md section manually"
-echo "  - Copy templates/claude-md-section.md content into your project's CLAUDE.md"
-echo "  - Create .knowledge/raw/ and .knowledge/knowledge/ in your project"
+echo "Installed:"
+echo "  [global] GSD agent patches (researcher Step 0, verifier Step 10b)"
+echo "  [global] GSD workflow patches (new-project, new-milestone auto-init)"
+echo "  [global] ~/.claude/CLAUDE.md turn collection instruction"
+if [ -n "$PROJECT_DIR" ]; then
+echo "  [project] $PROJECT_DIR/.knowledge/ directories"
+fi
 echo ""
-echo "After GSD updates, re-run this script to reapply patches."
+echo "After GSD updates, re-run: ./install.sh --force"
