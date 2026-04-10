@@ -11,10 +11,15 @@ Before researching, check if the project has accumulated knowledge from previous
 
 **If raw/ has content:**
 
-1. Read all `.knowledge/raw/*.md` files
-2. Check if `.knowledge/knowledge/` exists. If not, create it.
-3. Read existing knowledge files (if any): `decisions.md`, `anti-patterns.md`, `troubleshooting.md`, `index.md`
-4. Compile new raw entries into knowledge/ structure:
+1. Read `.knowledge/knowledge/index.md` and extract the `Last compiled` date (YYYY-MM-DD format).
+   - If index.md does not exist or has no "Last compiled" line, treat as first compile (process ALL raw files).
+2. List `.knowledge/raw/*.md` files. Filter to only files with filename date >= the "Last compiled" date.
+   - Filename pattern: `YYYY-MM-DD.md`. Compare the date portion with "Last compiled" date.
+   - **If no files are newer than "Last compiled" date: skip Step 0 entirely** (log "No new raw entries since {date}, skipping compile").
+3. Read only the filtered (newer) raw files.
+4. Check if `.knowledge/knowledge/` exists. If not, create it.
+5. Read existing knowledge files (if any): `decisions.md`, `anti-patterns.md`, `troubleshooting.md`, `index.md`
+6. Compile new raw entries into knowledge/ structure:
 
    **Raw entry selection criteria — included in knowledge:**
    - Decisions or technical findings that prevent the same mistake in future sessions
@@ -53,7 +58,34 @@ Before researching, check if the project has accumulated knowledge from previous
      - Alternative is fixed → rewrite to `guardrails.md` as a positive action
      - Varies by context → reformat in `anti-patterns.md` using Observation-Reason-Instead structure
    - After migration, create `guardrails.md` and overwrite `anti-patterns.md` with the new format
-5. After reading existing knowledge files, add new entries or update existing entries to merge them
+7. After reading existing knowledge files, add new entries or update existing entries to merge them.
+
+   **Conflict detection:** When a new raw entry contradicts an existing knowledge entry (opposite conclusion, reversed decision, etc.):
+   - Do NOT overwrite the existing entry.
+   - Append a `[conflict: YYYY-MM-DD]` tag to the entry heading (where YYYY-MM-DD is today's date).
+   - Preserve both contents: show existing content first, then new content with a `> **New (YYYY-MM-DD):**` blockquote.
+   - Example:
+     ```
+     ## Some Decision [conflict: 2026-04-10]
+     [existing content]
+     > **New (2026-04-10):** [contradicting content]
+     ```
+
+   **Reinforcement detection:** When a new raw entry reconfirms an existing knowledge entry (same conclusion observed again):
+   - Add or increment `**Observed:** N times (date1, date2, ...)` line below the entry heading.
+   - If the `**Observed:**` line already exists, append the new date and increment the count.
+   - Example (first reinforcement):
+     ```
+     ## Some Decision
+     **Observed:** 2 times (2026-04-08, 2026-04-10)
+     ```
+   - Example (subsequent reinforcement):
+     ```
+     ## Some Decision
+     **Observed:** 3 times (2026-04-08, 2026-04-10, 2026-04-11)
+     ```
+
+8. Update `index.md`: set `Last compiled` to today's date (YYYY-MM-DD), update `Total entries` count.
 
 **During research (Step 3):** knowledge/ lookup order:
 - `decisions.md` — Check [rejected] entries and choose an alternative approach
