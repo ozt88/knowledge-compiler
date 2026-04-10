@@ -52,6 +52,26 @@ After writing VERIFICATION.md, reconcile project knowledge from this phase's lea
      - Alternative is fixed → rewrite to `guardrails.md` as a positive action
      - Varies by context → reformat in `anti-patterns.md` using Observation-Reason-Instead structure
    - After migration, create `guardrails.md` and overwrite `anti-patterns.md` with the new format
+   **Conflict detection:** When a new raw entry contradicts an existing knowledge entry (opposite conclusion, reversed decision, etc.):
+   - Do NOT overwrite the existing entry.
+   - Append a `[conflict: YYYY-MM-DD]` tag to the entry heading (where YYYY-MM-DD is today's date).
+   - Preserve both contents: show existing content first, then new content with a `> **New (YYYY-MM-DD):**` blockquote.
+   - Example:
+     ```
+     ## Some Decision [conflict: 2026-04-10]
+     [existing content]
+     > **New (2026-04-10):** [contradicting content]
+     ```
+
+   **Reinforcement detection:** When a new raw entry reconfirms an existing knowledge entry (same conclusion observed again):
+   - Add or increment `**Observed:** N times (date1, date2, ...)` line below the entry heading.
+   - If the `**Observed:**` line already exists, append the new date and increment the count.
+   - Example (first reinforcement):
+     ```
+     ## Some Decision
+     **Observed:** 2 times (2026-04-08, 2026-04-10)
+     ```
+
 4. If conflicting `[active]` decisions exist, mark them `[uncertain]`
 
 **This is a FULL reconcile** (not incremental like Step 0 in researcher). This is the phase completion point, so revalidate overall consistency.
