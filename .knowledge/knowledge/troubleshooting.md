@@ -36,6 +36,13 @@
 **파일:** install.sh (patch_workflow 함수)
 **상태:** WR-02 — 코드 리뷰에서 발견, 미수정
 
+## install.sh --force가 CLAUDE.md를 stale 내용으로 덮어씀
+
+**에러:** templates/claude-md-section.md 업데이트 전에 install.sh --force 실행 시 CLAUDE.md의 최신 내용이 구버전으로 덮어써짐
+**원인:** install.sh --force는 templates/claude-md-section.md 내용을 CLAUDE.md에 삽입. template 파일이 구버전이면 최신 CLAUDE.md 변경이 유실
+**해결:** CLAUDE.md 내용 변경 시 templates/claude-md-section.md를 먼저 동일하게 업데이트한 뒤 install.sh --force 실행
+**파일:** templates/claude-md-section.md, ~/.claude/CLAUDE.md, install.sh
+
 ## gap closure 실행 중 git reset --soft로 인한 파일 삭제
 
 **에러:** gap closure plan 실행(05-02) 중 Task 1 커밋이 Phase 5 구현 파일(patches, skills, install.sh)을 전부 삭제

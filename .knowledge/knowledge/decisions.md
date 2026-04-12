@@ -77,3 +77,10 @@
 **결과:** 검증 단계에서 ROADMAP-PLAN 불일치 갭 발견 — 별도 갭 클로저 플랜 필요
 **결정:** implementation 완료 후 docs가 현실과 달라진 경우 별도 gap-closure plan(--gaps 플래그)으로 문서 정렬. 이는 일반 실행 플랜과 달리 문서만 수정하는 패턴.
 **상태:** [active]
+
+## 설계 결정 — Knowledge raw 수집 시점 명시적 전환
+
+**시도:** CLAUDE.md에 per-turn 행동 지시로 raw 수집 삽입
+**결과:** GSD workflow 실행 중 지시가 밀려 누락되는 신뢰성 문제 발생. CLAUDE.md 업데이트 시 templates/claude-md-section.md 동기화도 필요하나 놓치기 쉬움
+**결정:** per-turn 자동 기록 제거. /gsd-clear(세션 종료)와 /gsd-knowledge-compile(on-demand) 실행 시 Step 0에서 명시적으로 수집. compile-manifest.json의 `last_raw_captured` 필드로 중복 방지
+**상태:** [active]

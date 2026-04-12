@@ -7,6 +7,7 @@ allowed-tools:
   - Write
   - Bash
   - Glob
+  - Agent
 ---
 
 <objective>
@@ -17,29 +18,39 @@ allowed-tools:
 
 <process>
 
-**Step 0: 세션 대화 → raw 기록**
+**Step 0: 서브에이전트로 세션 대화 → raw 기록**
 
 `.knowledge/raw/` 디렉토리가 없으면 이 단계를 건너뛴다.
 
 1. `.planning/compile-manifest.json`에서 `last_raw_captured` 읽기
-   - 없으면: 세션 전체 대화를 대상으로 함
-   - 있으면: 해당 시각 이후 대화만 대상으로 함
+   - 없으면: null (세션 전체 대상)
+   - 있으면: 해당 ISO 시각 문자열
 
-2. 대상 범위의 대화에서 기록할 만한 내용 추출:
-   - 수행한 작업과 결과 (Phase 실행, 파일 수정, 설계 결정 등)
-   - 핵심 발견 또는 결정 사항
-   - 해결한 문제 또는 발생한 오류와 해법
+2. 현재 세션 JSONL 파일 경로 확인:
+   - Bash로 `C:\Users\DELL\.claude\projects\c--Users-DELL-Desktop-knowledge-compiler\` 디렉토리의 `.jsonl` 파일 목록을 mtime 내림차순으로 조회
+   - mtime 기준 가장 최신 파일 = 현재 세션 JSONL
 
-3. `.knowledge/raw/{YYYY-MM-DD}.md`에 append (없으면 생성):
-   ```
-   ### {HH:MM} — {한줄 제목}
-   - {항목 1}
-   - {항목 2}
-   - {항목 3}
-   ```
-   기록할 내용이 없으면 이 단계를 건너뛴다.
+3. Agent 도구로 서브에이전트 호출 (subagent_type: general-purpose):
+   - JSONL 경로, last_raw_captured 값, 오늘 날짜(YYYY-MM-DD)를 프롬프트에 포함
+   - 서브에이전트 역할:
+     a. JSONL 파일을 UTF-8로 읽어 각 줄을 JSON 파싱
+     b. `last_raw_captured`가 있으면 그 시각 이후 항목만 처리, 없으면 전체
+     c. `type == "user"` 항목: `message.content` (string) 추출
+     d. `type == "assistant"` 항목: `message.content` 리스트에서 `type == "text"` 블록의 `text` 추출
+     e. 추출한 대화에서 기록할 만한 내용 식별:
+        - 수행한 작업과 결과 (Phase 실행, 파일 수정, 설계 결정 등)
+        - 해결한 문제 또는 발생한 오류와 해법
+        - 핵심 발견 또는 결정 사항
+     f. `.knowledge/raw/{YYYY-MM-DD}.md`에 append (없으면 생성):
+        ```
+        ### {HH:MM} — {한줄 제목}
+        - {항목 1}
+        - {항목 2}
+        ```
+        기록할 내용이 없으면 파일 수정 없이 종료
+     g. 완료 후 기록 여부와 요약을 반환
 
-4. `.planning/compile-manifest.json`의 `last_raw_captured`를 현재 시각(ISO)으로 업데이트
+4. 서브에이전트 완료 후 `.planning/compile-manifest.json`의 `last_raw_captured`를 현재 시각(ISO)으로 업데이트
    - 파일이 없으면 `{ "last_raw_captured": "..." }` 로 새로 생성
 
 **Step 1: raw/ 존재 확인**
