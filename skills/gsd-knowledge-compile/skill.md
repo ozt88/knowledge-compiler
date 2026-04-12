@@ -72,7 +72,7 @@ allowed-tools:
 **Step 3: 변경된 소스 파일 스캔**
 
 다음 파일을 스캔해 변경 여부를 판단한다:
-- `raw/*.md` — 파일명 날짜(YYYY-MM-DD)가 `last_compiled`보다 최신인 파일
+- `raw/*.md` — 파일명 날짜(YYYY-MM-DD)가 `last_compiled`보다 최신이거나 같은 파일
 - `.planning/**/*.md` — manifest에 기록된 mtime과 현재 mtime이 다른 파일
 - **제외:** `.planning/compile-manifest.json` 자체 (자기 참조 방지)
 

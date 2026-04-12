@@ -43,6 +43,13 @@
 **해결:** CLAUDE.md 내용 변경 시 templates/claude-md-section.md를 먼저 동일하게 업데이트한 뒤 install.sh --force 실행
 **파일:** templates/claude-md-section.md, ~/.claude/CLAUDE.md, install.sh
 
+## gsd-clear/gsd-knowledge-compile — last_raw_captured UTC 타임존 불일치
+
+**에러:** Step 0 실행 시 항상 "nothing to record" — JSONL 항목이 cutoff보다 이전으로 판정
+**원인:** `last_raw_captured`를 현재 벽시계 시각(KST)을 UTC 포맷으로 그대로 기록. KST 22:10을 22:10Z로 저장하면 실제 UTC(13:10Z)보다 9시간 미래 값이 됨. JSONL 타임스탬프는 순수 UTC이므로 항상 cutoff보다 이전
+**해결:** 서브에이전트가 JSONL에서 처리한 마지막 항목의 실제 UTC 타임스탬프를 반환 → 그 값을 `last_raw_captured`에 저장. 현재 시각(벽시계) 사용 금지
+**파일:** skills/gsd-clear/skill.md, skills/gsd-knowledge-compile/skill.md, .planning/compile-manifest.json
+
 ## gap closure 실행 중 git reset --soft로 인한 파일 삭제
 
 **에러:** gap closure plan 실행(05-02) 중 Task 1 커밋이 Phase 5 구현 파일(patches, skills, install.sh)을 전부 삭제
