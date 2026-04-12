@@ -94,6 +94,50 @@ patch_agent() {
     info "$agent_name patched"
 }
 
+# --- Workflow patching ---
+patch_workflow() {
+    local workflow_file="$1"
+    local patch_file="$2"
+    local anchor="$3"
+    local workflow_name
+    workflow_name="$(basename "$workflow_file")"
+
+    if [ ! -f "$workflow_file" ]; then
+        warn "$workflow_name not found at $workflow_file — skipping"
+        return 0
+    fi
+
+    if grep -q "$PATCH_MARKER" "$workflow_file" 2>/dev/null; then
+        if [ "$FORCE" = true ]; then
+            # Remove existing patch block
+            local tmp_file
+            tmp_file="$(mktemp)"
+            awk -v marker="$PATCH_MARKER" '
+                $0 ~ marker { found=1; next }
+                found && /^## / { found=0 }
+                !found { print }
+            ' "$workflow_file" > "$tmp_file"
+            mv "$tmp_file" "$workflow_file"
+            warn "$workflow_name existing patch removed (--force)"
+        else
+            warn "$workflow_name already patched — skipping (use --force to re-apply)"
+            return 0
+        fi
+    fi
+
+    local patch_content
+    patch_content="$(tail -n +3 "$patch_file")"
+
+    local tmp_file
+    tmp_file="$(mktemp)"
+    awk -v anchor="$anchor" -v patch="$patch_content" '
+        $0 ~ anchor { print patch; print ""; }
+        { print }
+    ' "$workflow_file" > "$tmp_file"
+    mv "$tmp_file" "$workflow_file"
+    info "$workflow_name patched"
+}
+
 # --- Parse arguments ---
 PROJECT_DIR=""
 while [[ $# -gt 0 ]]; do
@@ -126,12 +170,23 @@ patch_agent \
     "$SCRIPT_DIR/patches/gsd-verifier.patch.md" \
     "## Return to Orchestrator"
 
+patch_agent \
+    "$AGENTS_DIR/gsd-planner.md" \
+    "$SCRIPT_DIR/patches/gsd-planner.patch.md" \
+    "</project_context>"
+
 echo ""
 
 # --- 2. Patch workflows (.knowledge/ auto-init on new-project/new-milestone) ---
 echo "--- Patching GSD workflows ---"
 
 KNOWLEDGE_INIT_BLOCK='mkdir -p .knowledge/raw .knowledge/knowledge'
+
+# discuss-phase.md: knowledge lookup before load_prior_context
+patch_workflow \
+    "$WORKFLOWS_DIR/discuss-phase.md" \
+    "$SCRIPT_DIR/patches/gsd-discuss-phase.patch.md" \
+    "<step name=\"load_prior_context\">"
 
 # new-project.md: insert after "git init"
 if [ -f "$WORKFLOWS_DIR/new-project.md" ]; then
@@ -186,7 +241,36 @@ fi
 
 echo ""
 
-# --- 4. Project setup (optional) ---
+# --- 4. Install GSD skills ---
+echo "--- Installing GSD skills ---"
+
+SKILLS_DIR="$HOME/.claude/skills"
+mkdir -p "$SKILLS_DIR"
+
+install_skill() {
+    local skill_name="$1"
+    local skill_src="$SCRIPT_DIR/skills/$skill_name/skill.md"
+    local skill_dst="$SKILLS_DIR/$skill_name/skill.md"
+
+    if [ ! -f "$skill_src" ]; then
+        warn "Skill $skill_name not found at $skill_src — skipping"
+        return 0
+    fi
+
+    mkdir -p "$SKILLS_DIR/$skill_name"
+    if [ -f "$skill_dst" ] && [ "$FORCE" = false ]; then
+        warn "$skill_name already installed — skipping (use --force to re-install)"
+    else
+        cp "$skill_src" "$skill_dst"
+        info "$skill_name installed"
+    fi
+}
+
+install_skill "gsd-clear"
+install_skill "gsd-knowledge-compile"
+echo ""
+
+# --- 5. Project setup (optional) ---
 
 if [ -n "$PROJECT_DIR" ]; then
     echo "--- Setting up project: $PROJECT_DIR ---"
@@ -201,8 +285,10 @@ fi
 echo "=== Done ==="
 echo ""
 echo "Installed:"
-echo "  [global] GSD agent patches (researcher Step 0, verifier Step 10b)"
+echo "  [global] GSD agent patches (researcher Step 3 lookup, verifier Step 10b, planner fallback compile + lookup)"
 echo "  [global] GSD workflow patches (new-project, new-milestone auto-init)"
+echo "  [global] discuss-phase knowledge lookup"
+echo "  [global] GSD skills (gsd-clear, gsd-knowledge-compile)"
 echo "  [global] ~/.claude/CLAUDE.md turn collection instruction"
 if [ -n "$PROJECT_DIR" ]; then
 echo "  [project] $PROJECT_DIR/.knowledge/ directories"
