@@ -64,6 +64,20 @@
 **결정:** 갭 클로저 플랜(05-02-PLAN.md)으로 ROADMAP.md Phase 5 Goal/SCs/plan entry 및 REQUIREMENTS.md WORKFLOW-01~07을 실제 구현에 맞게 정렬하여 해소. 이후 ROADMAP-PLAN 동기화는 guardrails로 강제.
 **상태:** [active]
 
+## 설계 결정 — gsd-clear 커스텀 스킬 삭제
+
+**시도:** skills/gsd-clear/skill.md 커스텀 스킬 유지 (compile + /clear 단일 명령)
+**결과:** GSD 내장 gsd-clear 스킬과 중복. Step 0 subagent 제거로 커스텀 스킬의 차별점(JSONL 기반 raw 캡처) 소멸
+**결정:** skills/gsd-clear/skill.md 삭제. GSD 내장 /gsd-clear 스킬 사용. install.sh에서 gsd-clear 설치 항목 없음 (의도적)
+**상태:** [active]
+
+## 설계 결정 — JSONL 기반 knowledge 참조율 측정
+
+**시도:** knowledge 참조 효과를 정성적으로 추측
+**결과:** JSONL 세션 로그에 Read tool_use 호출이 기록되므로 `.knowledge/knowledge/` 파일 참조 횟수를 실제로 집계 가능
+**결정:** analyze_knowledge_reads.js로 세션별 compiled_reads 집계 (raw/ 제외). 초기 결과: planner 세션 0건(패치 설치 후에도 미참조), executor 세션 5파일(D-11 의도 불일치) — Phase 6 감사에서 원인 규명
+**상태:** [active]
+
 ## 설계 결정 — researcher compile 제거, /gsd-clear primary 트리거
 
 **시도:** researcher Step 0에서 compile 수행
@@ -78,9 +92,11 @@
 **결정:** implementation 완료 후 docs가 현실과 달라진 경우 별도 gap-closure plan(--gaps 플래그)으로 문서 정렬. 이는 일반 실행 플랜과 달리 문서만 수정하는 패턴.
 **상태:** [active]
 
-## 설계 결정 — Knowledge raw 수집 시점 명시적 전환
+## 설계 결정 — Knowledge raw 수집 방식 변천
 
-**시도:** CLAUDE.md에 per-turn 행동 지시로 raw 수집 삽입
-**결과:** GSD workflow 실행 중 지시가 밀려 누락되는 신뢰성 문제 발생. CLAUDE.md 업데이트 시 templates/claude-md-section.md 동기화도 필요하나 놓치기 쉬움
-**결정:** per-turn 자동 기록 제거. /gsd-clear(세션 종료)와 /gsd-knowledge-compile(on-demand) 실행 시 Step 0에서 명시적으로 수집. compile-manifest.json의 `last_raw_captured` 필드로 중복 방지
+**시도 1:** CLAUDE.md per-turn 행동 지시로 raw 수집
+**결과 1:** GSD workflow 실행 중 지시가 밀려 누락되는 신뢰성 문제 발생
+**시도 2 (Phase 5):** per-turn 제거 → /gsd-clear + /gsd-knowledge-compile Step 0에서 subagent JSONL 파싱으로 명시적 수집
+**결과 2:** UTC/KST 타임존 버그 반복 발생. 복잡도 대비 가치 낮음. Step 0 subagent 제거
+**결정:** per-turn CLAUDE.md 방식으로 복귀. gsd-knowledge-compile은 raw → knowledge/ 컴파일 전용 (Step 0 없음). gsd-clear는 GSD 내장 스킬 사용 (커스텀 스킬 삭제)
 **상태:** [active]

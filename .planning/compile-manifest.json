@@ -1,13 +1,14 @@
 {
   "last_compiled": "2026-04-12",
-  "last_raw_captured": "2026-04-12T13:31:41.229Z",
+  "last_raw_captured": "2026-04-12T13:51:49.141Z",
   "source_files": {
+    ".planning/phases/06-gsd-knowledge/06-CONTEXT.md": 1776004020,
     ".knowledge/raw/2026-04-07.md": 1775825277,
     ".knowledge/raw/2026-04-08.md": 1775825277,
     ".knowledge/raw/2026-04-09.md": 1775825277,
     ".knowledge/raw/2026-04-10.md": 1775825277,
     ".knowledge/raw/2026-04-11.md": 1775971992,
-    ".knowledge/raw/2026-04-12.md": 1776000756,
+    ".knowledge/raw/2026-04-12.md": 1776004755,
     ".planning/debug/knowledge-compilation-not-working.md": 1775825277,
     ".planning/phases/01-compiler-prompt-refactor/01-01-PLAN.md": 1775825277,
     ".planning/phases/01-compiler-prompt-refactor/01-01-SUMMARY.md": 1775825277,
@@ -54,8 +55,8 @@
     ".planning/quick/260410-p9f-readme-md-docs-design-md-v1-1/260410-p9f-SUMMARY.md": 1775825277,
     ".planning/PROJECT.md": 1775825277,
     ".planning/REQUIREMENTS.md": 1775971988,
-    ".planning/ROADMAP.md": 1775972081,
-    ".planning/STATE.md": 1775972625,
+    ".planning/ROADMAP.md": 1776002652,
+    ".planning/STATE.md": 1776002662,
     ".planning/v1.1-MILESTONE-AUDIT.md": 1775825277
   }
 }

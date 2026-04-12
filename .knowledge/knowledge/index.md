@@ -1,7 +1,7 @@
 # Knowledge Index
 
 **Last compiled:** 2026-04-12
-**Total entries:** 38 (decisions: 12, guardrails: 10, anti-patterns: 6, troubleshooting: 8)
+**Total entries:** 42 (decisions: 14, guardrails: 11, anti-patterns: 6, troubleshooting: 8, +3 updated)
 
 ## Quick Reference
 
@@ -48,7 +48,10 @@ knowledge-compiler 프로젝트(v1.1 Positive Prompt Refactor)의 5개 Phase 진
 | awk | troubleshooting.md#installsh-awk--v-멀티라인-변수-개행-소실 |
 | gap closure | decisions.md#설계-결정--갭-클로저-플랜-패턴, anti-patterns.md#gap-closure-실행-전-staged-deletion-미확인, troubleshooting.md#gap-closure-실행-중-git-reset---soft로-인한-파일-삭제 |
 | git reset | anti-patterns.md#gap-closure-실행-전-staged-deletion-미확인, troubleshooting.md#gap-closure-실행-중-git-reset---soft로-인한-파일-삭제 |
-| last_raw_captured | decisions.md#설계-결정--knowledge-raw-수집-시점-명시적-전환, guardrails.md#knowledge-raw-수집-명시적-트리거 |
-| gsd-knowledge-compile | decisions.md#설계-결정--knowledge-raw-수집-시점-명시적-전환, guardrails.md#knowledge-raw-수집-명시적-트리거 |
+| last_raw_captured | decisions.md#설계-결정--knowledge-raw-수집-방식-변천 |
+| gsd-knowledge-compile | decisions.md#설계-결정--knowledge-raw-수집-방식-변천, guardrails.md#knowledge-raw-수집--per-turn-claudemd-방식 |
+| gsd-clear | decisions.md#설계-결정--gsd-clear-커스텀-스킬-삭제 |
+| JSONL 측정 | decisions.md#설계-결정--jsonl-기반-knowledge-참조율-측정 |
+| per-turn | guardrails.md#knowledge-raw-수집--per-turn-claudemd-방식, decisions.md#설계-결정--knowledge-raw-수집-방식-변천 |
 | template | guardrails.md#templatesclaude-md-sectionmd-동기화, troubleshooting.md#installsh---force가-claudemd를-stale-내용으로-덮어씀 |
 | UTC | troubleshooting.md#gsd-cleargsd-knowledge-compile--last_raw_captured-utc-타임존-불일치 |
