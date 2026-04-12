@@ -55,3 +55,25 @@
 **결과:** Phase 2 이후 패치 내용이 에이전트 파일에 미반영되는 버그 발생
 **결정:** install.sh에 --force 옵션 추가하여 마커 있어도 최신 패치 내용으로 교체 가능하게 수정
 **상태:** [active]
+
+## 설계 결정 — Phase 5 spec-only → implementation 전환 후 ROADMAP 동기화
+**Observed:** 2 times (2026-04-12, 2026-04-12)
+
+**시도:** Phase 5를 "명세 문서 작성(spec-only)" 단계로 계획
+**결과:** 사용자 요청으로 spec 문서 생성을 건너뛰고 패치/스킬 직접 구현으로 전환. ROADMAP이 즉시 업데이트되지 않아 검증 단계에서 5개 갭 발생(ROADMAP-PLAN 불일치)
+**결정:** 갭 클로저 플랜(05-02-PLAN.md)으로 ROADMAP.md Phase 5 Goal/SCs/plan entry 및 REQUIREMENTS.md WORKFLOW-01~07을 실제 구현에 맞게 정렬하여 해소. 이후 ROADMAP-PLAN 동기화는 guardrails로 강제.
+**상태:** [active]
+
+## 설계 결정 — researcher compile 제거, /gsd-clear primary 트리거
+
+**시도:** researcher Step 0에서 compile 수행
+**결과:** researcher 역할(리서치)과 compile 역할 혼재
+**결정:** researcher는 compile 없이 Step 3 lookup만 수행. /gsd-clear(세션 종료 시)와 planner fallback(이전 세션 compile 누락 시)이 compile 담당
+**상태:** [active]
+
+## 설계 결정 — 갭 클로저 플랜 패턴 (implementation 후 docs 정렬)
+
+**시도:** implementation plan 실행 후 ROADMAP이 자동으로 업데이트되기를 기대
+**결과:** 검증 단계에서 ROADMAP-PLAN 불일치 갭 발견 — 별도 갭 클로저 플랜 필요
+**결정:** implementation 완료 후 docs가 현실과 달라진 경우 별도 gap-closure plan(--gaps 플래그)으로 문서 정렬. 이는 일반 실행 플랜과 달리 문서만 수정하는 패턴.
+**상태:** [active]

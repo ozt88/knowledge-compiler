@@ -20,3 +20,25 @@
 **원인:** docs 커밋 stat에 패치 파일이 포함되지 않아 변경 사실이 눈에 띄지 않음
 **해결:** git cat-file로 각 커밋 tree blob hash 비교하여 revert 확인; 이후 재적용
 **파일:** patches/gsd-phase-researcher.patch.md, patches/gsd-verifier.patch.md
+
+## install.sh --force 인수 파싱 순서 버그
+
+**에러:** install.sh --force 실행 시 FORCE가 항상 false로 동작하여 기존 패치 재적용 불가
+**원인:** argument 파싱 블록(`while [[ $# -gt 0 ]]`)이 patch_agent() 호출 이후에 위치
+**해결:** argument 파싱 블록을 스크립트 앞쪽(patch_agent 호출 전)으로 이동
+**파일:** install.sh (커밋: 41c29b0)
+
+## install.sh awk -v 멀티라인 변수 개행 소실
+
+**에러:** patch_workflow()에서 awk -v patch="$patch_content" 로 멀티라인 내용 전달 시 개행이 소실되어 패치 내용이 한 줄로 플래트닝됨
+**원인:** awk -v 변수 할당에서 개행(\n) 문자가 보존되지 않는 동작
+**해결:** patch_content를 임시 파일로 저장 후 awk getline으로 읽거나, printf/heredoc 방식으로 전환
+**파일:** install.sh (patch_workflow 함수)
+**상태:** WR-02 — 코드 리뷰에서 발견, 미수정
+
+## gap closure 실행 중 git reset --soft로 인한 파일 삭제
+
+**에러:** gap closure plan 실행(05-02) 중 Task 1 커밋이 Phase 5 구현 파일(patches, skills, install.sh)을 전부 삭제
+**원인:** 이전 세션의 `git reset --soft` 연산이 남긴 staged deletions이 첫 커밋에 포함됨. reset --soft는 working tree 파일은 유지하지만 index(staged) 상태를 변경하여 이전 브랜치의 삭제 상태가 staged로 남음
+**해결:** 원본 커밋 해시(00e7ee9, e5c9cbf, 62b9795, d344242)에서 `git checkout {commit} -- {files}`로 파일 복구 후 별도 restore 커밋 생성
+**파일:** patches/gsd-discuss-phase.patch.md, patches/gsd-planner.patch.md, patches/gsd-phase-researcher.patch.md, skills/gsd-clear/skill.md, skills/gsd-knowledge-compile/skill.md, install.sh
