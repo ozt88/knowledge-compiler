@@ -75,7 +75,7 @@
 
 **시도:** knowledge 참조 효과를 정성적으로 추측
 **결과:** JSONL 세션 로그에 Read tool_use 호출이 기록되므로 `.knowledge/knowledge/` 파일 참조 횟수를 실제로 집계 가능
-**결정:** analyze_knowledge_reads.js로 세션별 compiled_reads 집계 (raw/ 제외). 초기 결과: planner 세션 0건(패치 설치 후에도 미참조), executor 세션 5파일(D-11 의도 불일치) — Phase 6 감사에서 원인 규명
+**결정:** analyze_knowledge_reads.js로 세션별 compiled_reads 집계 (raw/ 제외). Phase 6 research 9개 세션 분석: discuss+plan 병합 세션 PASS(index-first 패턴 확인), planner 단독 세션 MISS. 패치 중복(×6/×8)이 참조율 저하 원인으로 추정
 **상태:** [active]
 
 ## 설계 결정 — researcher compile 제거, /gsd-clear primary 트리거
@@ -83,6 +83,13 @@
 **시도:** researcher Step 0에서 compile 수행
 **결과:** researcher 역할(리서치)과 compile 역할 혼재
 **결정:** researcher는 compile 없이 Step 3 lookup만 수행. /gsd-clear(세션 종료 시)와 planner fallback(이전 세션 compile 누락 시)이 compile 담당
+**상태:** [superseded — Phase 6에서 planner fallback compile도 제거됨]
+
+## 설계 결정 — GSD 프로세스 knowledge 최소 부하 원칙 (Phase 6)
+
+**시도:** researcher/planner/verifier 모두 knowledge compile 또는 lookup 수행. planner에는 fallback compile 포함
+**결과:** compile에 과도한 시간·토큰 소비. verifier 역할(결과 확인)에는 knowledge 불필요. fallback compile은 품질 낮은 자동 처리
+**결정:** lookup은 researcher/planner/discuss에만 유지 (PATCH 마커 각 1개). verifier 패치 전체 제거(count=0). planner fallback compile 제거. compile = /gsd-knowledge-compile 수동 전용
 **상태:** [active]
 
 ## 설계 결정 — 갭 클로저 플랜 패턴 (implementation 후 docs 정렬)

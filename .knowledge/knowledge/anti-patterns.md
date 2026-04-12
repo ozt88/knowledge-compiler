@@ -30,6 +30,12 @@
 **이유:** patch_workflow() 함수 추가 시 기존 if-else 블록을 실제 호출로 교체하지 않음
 **대신:** patch_workflow() 함수 신규 추가 시 기존 핸들러 블록을 실제 patch_workflow() 호출로 교체
 
+## Python PATCH 정리 후 install.sh --force 재실행
+
+**관찰:** Python으로 PATCH 블록을 ×1로 정상화한 직후 `install.sh --force` 실행
+**이유:** `--force`는 researcher/planner에 `unpatch_agent`를 호출 → awk가 `<!-- PATCH -->` 블록 처리 불가 → 제거 실패 후 재삽입 → ×2로 파괴. Python 작업 결과가 즉시 무효화됨
+**대신:** Python 제거 후에는 `install.sh`(--force 없이) 실행. count=0이면 신규 삽입, count=1이면 skip
+
 ## gap closure 실행 전 staged deletion 미확인
 
 **관찰:** gap closure plan 실행 시 이전 세션의 git reset --soft가 남긴 staged deletions이 첫 커밋에 포함되어 구현 파일 전체 삭제 발생 (05-01, 05-02 두 번 반복)
