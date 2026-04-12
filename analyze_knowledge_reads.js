@@ -1,5 +1,17 @@
 const fs = require('fs');
-const proj = 'C:/Users/DELL/.claude/projects/c--Users-DELL-Desktop-knowledge-compiler';
+const os = require('os');
+const path = require('path');
+
+// Priority: CLI arg > CLAUDE_PROJECT_DIR env > auto-detect from cwd
+function resolveProjectDir() {
+  if (process.argv[2]) return process.argv[2];
+  if (process.env.CLAUDE_PROJECT_DIR) return process.env.CLAUDE_PROJECT_DIR;
+  const cwd = process.cwd().replace(/\\/g, '/');
+  const slug = cwd.replace(/[:/]/g, '-').replace(/^-/, '');
+  return path.join(os.homedir(), '.claude', 'projects', slug).replace(/\\/g, '/');
+}
+
+const proj = resolveProjectDir();
 const files = fs.readdirSync(proj).filter(x => x.endsWith('.jsonl'));
 files.sort((a, b) => fs.statSync(proj + '/' + a).mtimeMs - fs.statSync(proj + '/' + b).mtimeMs);
 
