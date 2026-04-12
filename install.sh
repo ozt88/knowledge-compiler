@@ -266,7 +266,6 @@ install_skill() {
     fi
 }
 
-install_skill "gsd-clear"
 install_skill "gsd-knowledge-compile"
 echo ""
 
@@ -288,7 +287,7 @@ echo "Installed:"
 echo "  [global] GSD agent patches (researcher Step 3 lookup, verifier Step 10b, planner fallback compile + lookup)"
 echo "  [global] GSD workflow patches (new-project, new-milestone auto-init)"
 echo "  [global] discuss-phase knowledge lookup"
-echo "  [global] GSD skills (gsd-clear, gsd-knowledge-compile)"
+echo "  [global] GSD skills (gsd-knowledge-compile)"
 echo "  [global] ~/.claude/CLAUDE.md turn collection instruction"
 if [ -n "$PROJECT_DIR" ]; then
 echo "  [project] $PROJECT_DIR/.knowledge/ directories"
