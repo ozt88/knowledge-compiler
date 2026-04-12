@@ -113,3 +113,14 @@ Plans:
 | 3. Collection Instruction Refactor | v1.1 | 1/1 | Complete   | 2026-04-08 |
 | 4. Knowledge Importance Prioritization | v1.1 | 1/1 | Complete | 2026-04-10 |
 | 5. GSD Workflow Stages | v1.1 | 1/1 | Complete | 2026-04-12 |
+| 6. GSD Knowledge Reference Audit | v1.1 | 0/0 | Not planned | — |
+
+### Phase 6: GSD Knowledge Reference Audit
+
+**Goal:** GSD 각 단계(discuss/plan/research/execute/verify/clear)가 knowledge를 실제로 올바르게 참조하는지 검증하고 누락된 참조를 보완한다
+**Requirements**: TBD
+**Depends on:** Phase 5
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd-plan-phase 6 to break down)

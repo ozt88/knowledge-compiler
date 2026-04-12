@@ -61,6 +61,7 @@ Recent decisions affecting current work:
 ### Roadmap Evolution
 
 - Phase 4 added: Knowledge Importance Prioritization — raw 데이터 중 중요한 지식 판별 메커니즘 탐색
+- Phase 6 added: GSD Knowledge Reference Audit — gsd 각 단계들이 knowledge를 잘 참조하는지 확인필요
 
 ### Pending Todos
 
