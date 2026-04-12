@@ -2,14 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.1
 milestone_name: Positive Prompt Refactor
-status: Phase 05 Complete
-stopped_at: Phase 05 gsd-workflow-stages — verification passed (11/11)
-last_updated: "2026-04-12T15:00:00.000Z"
+status: Phase 06 Complete
+stopped_at: Phase 06 gsd-knowledge — verification passed
+last_updated: "2026-04-13T00:00:00.000Z"
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 6
-  completed_plans: 6
+  total_phases: 7
+  completed_phases: 6
+  total_plans: 10
+  completed_plans: 8
+  percent: 86
 ---
 
 # Project State
@@ -19,12 +20,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-07)
 
 **Core value:** GSD 서브에이전트가 과거 세션의 시도와 결정에 접근하여 같은 실수를 반복하지 않는 것.
-**Current focus:** Phase 05 — gsd-workflow-stages (COMPLETE)
+**Current focus:** Phase 06 — gsd-knowledge
 
 ## Current Position
 
-Phase: 05 (gsd-workflow-stages) — COMPLETE
-Plan: 2 of 2
+Phase: 06 (gsd-knowledge) — EXECUTING
+Plan: 1 of 2
 
 ## Performance Metrics
 
@@ -57,6 +58,9 @@ Recent decisions affecting current work:
 - [Phase 02-knowledge-format-system]: 두 패치의 핵심 형식 지시 블록은 동일하되 troubleshooting/index 설명은 verifier 고유 표현 유지 (D-08)
 - [Phase 03-collection-instruction-refactor]: 부정형 규칙 삭제 — Pink Elephant Problem 해소 (포함하지 않을 것 → 수행한 행동과 그 결과 긍정형 전환)
 - [Phase 03-collection-instruction-refactor]: template이 source of truth — CLAUDE.md는 template 내용으로 동기화
+- [Phase 06-gsd-knowledge]: 중복 PATCH 블록(researcher×6, planner×6, verifier×8) Python으로 수동 제거 후 재삽입 완료
+- [Phase 06-gsd-knowledge]: discuss-phase 앵커를 load_prior_context → check_existing으로 수정
+- [Phase 06-gsd-knowledge]: D-18/D-19(310d15b) 이미 완료, D-20 install.sh gsd-clear 없음 확인
 
 ### Roadmap Evolution
 

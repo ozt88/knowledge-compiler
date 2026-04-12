@@ -85,6 +85,16 @@ Plans:
 Plans:
 - [x] 05-01-PLAN.md — researcher Step 0 compile 제거 + planner fallback compile + discuss-phase lookup + /gsd-clear + /gsd-knowledge-compile 스킬 생성 + install.sh 배포
 
+### Phase 6: GSD Knowledge Reference Audit
+**Goal:** GSD 각 단계(discuss/plan/research/execute/verify/clear)가 knowledge를 실제로 올바르게 참조하는지 검증하고 누락된 참조를 보완한다
+**Requirements**: D-16, D-17, D-18, D-19, D-20, D-21, D-22, D-23
+**Depends on:** Phase 5
+**Plans:** 2 plans
+
+Plans:
+- [x] 06-01-PLAN.md — 중복 PATCH 블록 단일화(researcher×6, planner×6, verifier×8 → 각 1) + discuss-phase 앵커 수정 및 패치 적용
+- [x] 06-02-PLAN.md — JSONL 측정 재실행(D-22) + analyze_knowledge_reads.js 처리 + 감사 SUMMARY 완성
+
 ## Backlog
 
 ### Phase 999.1: PageIndex Integration — Knowledge Search Layer (BACKLOG)
@@ -113,14 +123,4 @@ Plans:
 | 3. Collection Instruction Refactor | v1.1 | 1/1 | Complete   | 2026-04-08 |
 | 4. Knowledge Importance Prioritization | v1.1 | 1/1 | Complete | 2026-04-10 |
 | 5. GSD Workflow Stages | v1.1 | 1/1 | Complete | 2026-04-12 |
-| 6. GSD Knowledge Reference Audit | v1.1 | 0/0 | Not planned | — |
-
-### Phase 6: GSD Knowledge Reference Audit
-
-**Goal:** GSD 각 단계(discuss/plan/research/execute/verify/clear)가 knowledge를 실제로 올바르게 참조하는지 검증하고 누락된 참조를 보완한다
-**Requirements**: TBD
-**Depends on:** Phase 5
-**Plans:** 0 plans
-
-Plans:
-- [ ] TBD (run /gsd-plan-phase 6 to break down)
+| 6. GSD Knowledge Reference Audit | v1.1 | 2/2 | Complete | 2026-04-13 |

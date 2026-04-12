@@ -50,6 +50,27 @@
 **해결:** 서브에이전트가 JSONL에서 처리한 마지막 항목의 실제 UTC 타임스탬프를 반환 → 그 값을 `last_raw_captured`에 저장. 현재 시각(벽시계) 사용 금지
 **파일:** skills/gsd-clear/skill.md, skills/gsd-knowledge-compile/skill.md, .planning/compile-manifest.json
 
+## install.sh unpatch_agent — <!-- PATCH --> 주석 블록 제거 불가
+
+**에러:** `install.sh --force` 실행 시 researcher/planner PATCH 블록이 제거되지 않고 재삽입 → 중복 증가
+**원인:** `unpatch_agent` awk가 `## Step 0: Knowledge Compile` / `## Step 10b: Knowledge Reconcile` 헤더 기반으로 블록 감지. researcher/planner 패치는 `<!-- PATCH:knowledge-compiler -->` 주석으로 시작하므로 패턴 매칭 불가
+**해결:** Python regex로 직접 제거 후 `install.sh`(--force 없이) 재실행으로 단일 블록 삽입: `re.sub(r'<!-- PATCH:knowledge-compiler[^>]*-->\n.*?(?=\n## |\Z)', '', content, flags=re.DOTALL)`
+**파일:** install.sh (unpatch_agent), ~/.claude/agents/gsd-phase-researcher.md, ~/.claude/agents/gsd-planner.md
+
+## install.sh patch_workflow — 앵커 미매칭 시 무음 실패
+
+**에러:** `install.sh` 실행 후 discuss-phase.md에 PATCH 마커 미삽입 (count=0), install.sh는 "patched" 출력
+**원인:** `patch_workflow` 앵커(`<step name="load_prior_context">`)가 실제 파일에 존재하지 않음. awk가 한 번도 매칭되지 않고 파일을 그대로 출력. 성공/실패 감지 로직 없음
+**해결:** 앵커를 실제 존재하는 step으로 수정. discuss-phase.md의 올바른 앵커 = `<step name="check_existing">`. 패치 후 즉시 `grep -c "PATCH:knowledge-compiler"` 로 count 확인
+**파일:** install.sh (patch_workflow discuss-phase 앵커), ~/.claude/get-shit-done/workflows/discuss-phase.md
+
+## install.sh patch_agent — planner 패치 마커 미삽입 (매번 재패치 시도)
+
+**에러:** `install.sh` 실행 후 `gsd-planner.md`에 PATCH 마커 count=0. install.sh는 "patched" 출력하지만 `grep -q "PATCH:knowledge-compiler"` 다음 실행 시 또 "patched" 반복
+**원인:** `gsd-planner.patch.md`의 line 3(tail -n +3 이후 첫 줄)에 `<!-- PATCH:knowledge-compiler -->` 마커가 없음. 삽입된 내용에 마커가 포함되지 않아 `patch_agent` 중복 체크가 매번 실패
+**해결:** 삽입 시 마커 주석을 content 앞에 수동으로 추가: `<!-- PATCH:knowledge-compiler — reapply after GSD updates -->`를 patch_content 앞에 붙여 Edit 또는 Python으로 직접 삽입
+**파일:** patches/gsd-planner.patch.md (line 3에 PATCH 마커 없음), ~/.claude/agents/gsd-planner.md
+
 ## gap closure 실행 중 git reset --soft로 인한 파일 삭제
 
 **에러:** gap closure plan 실행(05-02) 중 Task 1 커밋이 Phase 5 구현 파일(patches, skills, install.sh)을 전부 삭제
