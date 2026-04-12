@@ -166,14 +166,39 @@ patch_agent \
     "## Step 1: Receive Scope and Load Context"
 
 patch_agent \
-    "$AGENTS_DIR/gsd-verifier.md" \
-    "$SCRIPT_DIR/patches/gsd-verifier.patch.md" \
-    "## Return to Orchestrator"
-
-patch_agent \
     "$AGENTS_DIR/gsd-planner.md" \
     "$SCRIPT_DIR/patches/gsd-planner.patch.md" \
     "</project_context>"
+
+patch_agent \
+    "$AGENTS_DIR/gsd-executor.md" \
+    "$SCRIPT_DIR/patches/gsd-executor.patch.md" \
+    "</project_context>"
+
+patch_agent \
+    "$AGENTS_DIR/gsd-code-reviewer.md" \
+    "$SCRIPT_DIR/patches/gsd-code-reviewer.patch.md" \
+    "</project_context>"
+
+patch_agent \
+    "$AGENTS_DIR/gsd-code-fixer.md" \
+    "$SCRIPT_DIR/patches/gsd-code-fixer.patch.md" \
+    "</project_context>"
+
+patch_agent \
+    "$AGENTS_DIR/gsd-plan-checker.md" \
+    "$SCRIPT_DIR/patches/gsd-plan-checker.patch.md" \
+    "</project_context>"
+
+patch_agent \
+    "$AGENTS_DIR/gsd-debugger.md" \
+    "$SCRIPT_DIR/patches/gsd-debugger.patch.md" \
+    "</philosophy>"
+
+patch_agent \
+    "$AGENTS_DIR/gsd-nyquist-auditor.md" \
+    "$SCRIPT_DIR/patches/gsd-nyquist-auditor.patch.md" \
+    "<step name=\"load_context\">"
 
 echo ""
 
@@ -186,7 +211,7 @@ KNOWLEDGE_INIT_BLOCK='mkdir -p .knowledge/raw .knowledge/knowledge'
 patch_workflow \
     "$WORKFLOWS_DIR/discuss-phase.md" \
     "$SCRIPT_DIR/patches/gsd-discuss-phase.patch.md" \
-    "<step name=\"load_prior_context\">"
+    "<step name=\"check_existing\">"
 
 # new-project.md: insert after "git init"
 if [ -f "$WORKFLOWS_DIR/new-project.md" ]; then
