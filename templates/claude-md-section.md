@@ -1,20 +1,4 @@
-## Knowledge Compiler — 턴 수집
+## Knowledge Compiler — 수집 방식
 
-`.knowledge/raw/` 디렉토리가 존재하는 프로젝트에서만 적용한다. 디렉토리가 없으면 이 섹션 전체를 무시한다.
-
-매 응답의 마지막 단계로, 이번 턴에서 일어난 일을 `.knowledge/raw/` 에 기록한다.
-
-**규칙:**
-1. 응답 완료 직전에 Write 도구로 `.knowledge/raw/{YYYY-MM-DD}.md` 파일에 append (당일 파일이 없으면 생성)
-2. 형식: `### {HH:MM} — {한줄 제목}\n{2-3줄 요약}\n` (한국어)
-3. 요약에 포함할 것: 수행한 행동과 그 결과, 핵심 발견 또는 결정 사항, 변경된 파일 경로 (각 항목은 한 줄 이내로 요약)
-4. 사용자가 `/collect-off` 또는 "수집 중지"라고 하면 해당 세션 동안 수집 중단
-5. 이 지시는 GSD 워크플로 안팎 모두에서 항상 적용
-
-**예시:**
-```markdown
-### 22:04 — Stop Hook 발동 테스트
-- Stop Hook command 타입: 따옴표 이스케이프 수정 후 정상 발동 확인
-- Stop Hook prompt 타입: 턴 컨텍스트 접근 가능하나 검증 모드로 동작, 생성 불가
-- 결론: prompt 훅으로 자동 요약 수집 불가 → CLAUDE.md 행동 지시 방식으로 전환
-```
+raw 수집은 `/gsd-clear` 및 `/gsd-knowledge-compile` 실행 시 명시적으로 수행한다.
+턴마다 자동 기록하지 않는다.
