@@ -25,6 +25,16 @@
 - [ ] **RELEVANCE-03**: 에이전트 접근 지시가 index-first 패턴(index.md 먼저 읽고 관련 파일만 선택 Read)을 명시한다
 - [ ] **RELEVANCE-04**: researcher 패치와 verifier 패치의 선별 기준 및 index.md 형식 블록이 동일하다 (D-08 패턴)
 
+### WORKFLOW — GSD 워크플로 단계별 knowledge 활동
+
+- [x] **WORKFLOW-01**: researcher는 compile 없이 Step 3 lookup만 수행한다 — researcher Step 0 compile 블록이 패치 파일에서 제거된다 (D-01)
+- [x] **WORKFLOW-02**: planner는 fallback compile을 수행한다 — /gsd-clear 없이 세션이 종료된 경우 compile-manifest.json 기반 증분 컴파일을 실행한다 (D-03, D-06)
+- [x] **WORKFLOW-03**: discuss는 knowledge lookup만 수행한다 — compile 없이 decisions.md와 guardrails.md를 조회한다 (D-08)
+- [x] **WORKFLOW-04**: /gsd-clear 스킬이 구현된다 — compile + /clear를 단일 명령으로 수행하는 7단계 프로세스 (D-02)
+- [x] **WORKFLOW-05**: /gsd-knowledge-compile 스킬이 구현된다 — compile만 수행하고 컨텍스트를 유지하는 on-demand 커맨드 (D-14)
+- [x] **WORKFLOW-06**: compile 소스가 raw/ + .planning/** 전체를 포함한다 — 파일 유형 제한 없이 GSD 생성 아티팩트 전체 포함 (D-05)
+- [x] **WORKFLOW-07**: 모든 패치와 스킬이 install.sh를 통해 단일 명령으로 배포된다 — patch_workflow 함수와 install_skill 함수로 처리 (D-15)
+
 ## v2 Requirements
 
 ### LINT — 자동 검증
@@ -64,12 +74,19 @@
 | RELEVANCE-02 | Phase 4 | Pending |
 | RELEVANCE-03 | Phase 4 | Pending |
 | RELEVANCE-04 | Phase 4 | Pending |
+| WORKFLOW-01 | Phase 5 | Complete |
+| WORKFLOW-02 | Phase 5 | Complete |
+| WORKFLOW-03 | Phase 5 | Complete |
+| WORKFLOW-04 | Phase 5 | Complete |
+| WORKFLOW-05 | Phase 5 | Complete |
+| WORKFLOW-06 | Phase 5 | Complete |
+| WORKFLOW-07 | Phase 5 | Complete |
 
 **Coverage:**
-- v1.1 requirements: 10 total
-- Mapped to phases: 10
+- v1.1 requirements: 17 total
+- Mapped to phases: 17
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-07*
-*Last updated: 2026-04-09 — RELEVANCE requirements added for Phase 4*
+*Last updated: 2026-04-12 — WORKFLOW requirements added for Phase 5*

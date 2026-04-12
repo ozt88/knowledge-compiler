@@ -70,6 +70,21 @@ Plans:
 Plans:
 - [x] 04-01-PLAN.md — 두 패치에 선별 기준 + index.md 쿼리 안내 형식 + index-first 접근 지시 추가
 
+### Phase 5: GSD Workflow Stages
+**Goal:** GSD 워크플로 각 단계(discuss/plan/research/execute/verify/clear)에서 knowledge 활동(수집/컴파일/조회)을 배분하는 패치와 스킬을 구현한다
+**Depends on:** Phase 4
+**Requirements**: WORKFLOW-01, WORKFLOW-02, WORKFLOW-03, WORKFLOW-04, WORKFLOW-05, WORKFLOW-06, WORKFLOW-07
+**Success Criteria** (what must be TRUE):
+  1. discuss/plan/research 단계의 knowledge 활동(lookup/fallback-compile/lookup)이 각 패치 파일에 구현된다
+  2. /gsd-clear 스킬이 compile → /clear의 완전한 실행 순서를 포함한다
+  3. compile-manifest.json 기반 증분 컴파일 메커니즘이 planner 패치와 skill.md에 step-by-step으로 구현된다
+  4. B+C fusion 중복 처리 정책(reinforcement counter + conflict blockquote)이 skills/gsd-clear/skill.md Step 5에 명시된다
+  5. 모든 변경사항이 install.sh를 통해 단일 명령으로 배포된다
+**Plans:** 1/1 plans complete
+
+Plans:
+- [x] 05-01-PLAN.md — researcher Step 0 compile 제거 + planner fallback compile + discuss-phase lookup + /gsd-clear + /gsd-knowledge-compile 스킬 생성 + install.sh 배포
+
 ## Backlog
 
 ### Phase 999.1: PageIndex Integration — Knowledge Search Layer (BACKLOG)
@@ -97,3 +112,4 @@ Plans:
 | 2. Knowledge Format System | v1.1 | 1/1 | Complete   | 2026-04-08 |
 | 3. Collection Instruction Refactor | v1.1 | 1/1 | Complete   | 2026-04-08 |
 | 4. Knowledge Importance Prioritization | v1.1 | 1/1 | Complete | 2026-04-10 |
+| 5. GSD Workflow Stages | v1.1 | 1/1 | Complete | 2026-04-12 |
