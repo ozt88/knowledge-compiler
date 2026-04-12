@@ -48,10 +48,14 @@ compile + /clear 를 단일 명령으로 수행한다.
         - {항목 2}
         ```
         기록할 내용이 없으면 파일 수정 없이 종료
-     g. 완료 후 기록 여부와 요약을 반환
+     g. 완료 후 다음을 반환:
+        - 기록 여부와 작성된 항목 요약
+        - JSONL에서 처리한 가장 마지막 타임스탬프 (처리한 항목이 없으면 null 반환)
 
-4. 서브에이전트 완료 후 `.planning/compile-manifest.json`의 `last_raw_captured`를 현재 시각(ISO)으로 업데이트
+4. 서브에이전트 완료 후 `.planning/compile-manifest.json`의 `last_raw_captured`를 **서브에이전트가 반환한 마지막 JSONL 타임스탬프**로 업데이트
+   - 서브에이전트가 null을 반환한 경우(처리할 항목 없음)에는 업데이트하지 않음
    - 파일이 없으면 `{ "last_raw_captured": "..." }` 로 새로 생성
+   - **주의:** 현재 시각(벽시계)은 사용하지 않는다 — JSONL은 UTC이므로 KST 시각과 혼용하면 타임존 불일치 발생
 
 **Step 1: raw/ 존재 확인**
 
