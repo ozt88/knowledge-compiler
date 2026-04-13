@@ -84,9 +84,10 @@ None yet.
 | 260410-ijc | verifier Step 10b 증분 컴파일 전환 — full reconcile → Last compiled 기반 incremental | 2026-04-10 | 9a22f23 | [260410-ijc-verifier-step-10b-full-reconcile-researc](.planning/quick/260410-ijc-verifier-step-10b-full-reconcile-researc/) |
 | 260410-ir8 | verifier Step 10b 턴 수 일치 체크 + Stage 3 Knowledge Lint 구현 | 2026-04-10 | b7ff42a | [260410-ir8-verifier-step-10b-stage-3-lint](.planning/quick/260410-ir8-verifier-step-10b-stage-3-lint/) |
 | 260410-p9f | README.md + docs/DESIGN.md v1.1 최신화 | 2026-04-10 | 3d3a163 | [260410-p9f-readme-md-docs-design-md-v1-1](.planning/quick/260410-p9f-readme-md-docs-design-md-v1-1/) |
+| 260413-o4d | skill.md → SKILL.md 대소문자 수정 | 2026-04-13 | 5373221 | [260413-o4d-skill-md-skill-md](.planning/quick/260413-o4d-skill-md-skill-md/) |
 
 ## Session Continuity
 
-Last session: 2026-04-10T09:11:18.943Z
-Stopped at: Completed quick 260410-p9f README.md + DESIGN.md v1.1 update
+Last session: 2026-04-13T08:22:03.113Z
+Stopped at: Completed quick 260413-o4d skill.md → SKILL.md 대소문자 수정
 Resume file: None
