@@ -65,8 +65,8 @@ patch_agent() {
     agent_name="$(basename "$agent_file")"
 
     if [ ! -f "$agent_file" ]; then
-        error "$agent_name not found at $agent_file"
-        return 1
+        warn "$agent_name not found at $agent_file — skipping"
+        return 0
     fi
 
     if grep -q "$PATCH_MARKER" "$agent_file" 2>/dev/null; then
@@ -274,8 +274,8 @@ mkdir -p "$SKILLS_DIR"
 
 install_skill() {
     local skill_name="$1"
-    local skill_src="$SCRIPT_DIR/skills/$skill_name/skill.md"
-    local skill_dst="$SKILLS_DIR/$skill_name/skill.md"
+    local skill_src="$SCRIPT_DIR/skills/$skill_name/SKILL.md"
+    local skill_dst="$SKILLS_DIR/$skill_name/SKILL.md"
 
     if [ ! -f "$skill_src" ]; then
         warn "Skill $skill_name not found at $skill_src — skipping"
