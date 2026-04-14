@@ -17,6 +17,7 @@
 - [x] **Phase 5: GSD Workflow Stages** - GSD 단계별 knowledge 활동 배분 패치 및 스킬 구현 (completed 2026-04-12)
 - [x] **Phase 6: GSD Knowledge Reference Audit** - GSD 각 단계 knowledge 참조 검증 및 보완 (completed 2026-04-13)
 - [ ] **Phase 7: Knowledge Reinforcement Decay Audit** - 유용한/참조된 지식 증강과 유용하지 않은 지식 감쇄가 잘 동작하고 있는지?
+- [ ] **Phase 8: Knowledge Record & Retrieve Design** - 기록 메타데이터 설계, 증강/감쇄 구현, 조회 활용 개선을 통합 설계한다
 
 ## Phase Details
 
@@ -99,6 +100,16 @@ Plans:
 - [x] 06-01-PLAN.md — 중복 PATCH 블록 단일화(researcher×6, planner×6, verifier×8 → 각 1) + discuss-phase 앵커 수정 및 패치 적용
 - [x] 06-02-PLAN.md — JSONL 측정 재실행(D-22) + analyze_knowledge_reads.js 처리 + 감사 SUMMARY 완성
 
+### Phase 8: Knowledge Record & Retrieve Design
+
+**Goal:** 기록 메타데이터 설계, 증강/감쇄 구현, 조회 활용 개선을 통합 설계한다
+**Depends on:** Phase 7
+**Requirements**: TBD (Phase 7 완료 후 확정)
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd-plan-phase 8 after Phase 7 completes)
+
 ## Backlog
 
 ### Phase 999.1: PageIndex Integration — Knowledge Search Layer (BACKLOG)
@@ -129,6 +140,7 @@ Plans:
 | 5. GSD Workflow Stages | v1.1 | 1/1 | Complete | 2026-04-12 |
 | 6. GSD Knowledge Reference Audit | v1.1 | 2/2 | Complete | 2026-04-13 |
 | 7. Knowledge Reinforcement Decay Audit | v1.1 | 0/2 | In progress | — |
+| 8. Knowledge Record & Retrieve Design | v1.2 | 0/0 | Planned | — |
 
 ### Phase 7: Knowledge Reinforcement Decay Audit
 
