@@ -85,7 +85,7 @@ Phase 8 리서치 범위에 포함한다. 검토할 방향:
 
 ### Phase 7 결과물 (Phase 8 시작 전 반드시 확인)
 
-- `.planning/phases/07-knowledge-reinforcement-decay-audit/07-RESEARCH.md` — 증강/감쇄 현황 분석 + 권고안 (Phase 8 구현의 출발점)
+- `.planning/phases/07-knowledge-reinforcement-decay-audit/07-RESEARCH.md` — 증강/감쇄 현황 분석 + 권고안 (Phase 8 구현의 출발점, D-03 시뮬레이션 미실행 — Phase 8 구현 후 audit으로 대체)
 - `.knowledge/knowledge/decisions.md` — 현재 항목 형태 (메타데이터 설계 기준선)
 
 ### 현재 컴파일러 구현

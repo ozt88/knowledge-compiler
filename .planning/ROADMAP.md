@@ -139,16 +139,16 @@ Plans:
 | 4. Knowledge Importance Prioritization | v1.1 | 1/1 | Complete | 2026-04-10 |
 | 5. GSD Workflow Stages | v1.1 | 1/1 | Complete | 2026-04-12 |
 | 6. GSD Knowledge Reference Audit | v1.1 | 2/2 | Complete | 2026-04-13 |
-| 7. Knowledge Reinforcement Decay Audit | v1.1 | 0/2 | In progress | — |
+| 7. Knowledge Reinforcement Decay Audit | v1.1 | 0/2 | Skipped | 2026-04-14 |
 | 8. Knowledge Record & Retrieve Design | v1.2 | 0/0 | Planned | — |
 
 ### Phase 7: Knowledge Reinforcement Decay Audit
 
-**Goal:** B+C fusion 증강 메커니즘의 실제 동작을 검증하고, 감쇄 메커니즘 현황을 분석하여 자동화 방안 권고안을 도출한다
+**Goal:** B+C fusion 증강 메커니즘의 실제 동작을 검증하고, 감쇄 메커니즘 현황을 분석하여 자동화 방안 권고안을 도출한다 *(skipped — RESEARCH.md만 활용, Phase 8으로 진행)*
 **Requirements**: D-01, D-02, D-03, D-04
 **Depends on:** Phase 6
-**Plans:** 2 plans
+**Plans:** 2 plans (skipped)
 
 Plans:
-- [ ] 07-01-PLAN.md — D-03 컴파일 시뮬레이션 (Before/After snapshot + /gsd-knowledge-compile 실행 + B+C fusion 판정)
-- [ ] 07-02-PLAN.md — D-02 감쇄 갭 분석 + D-04 최종 권고안 확정 (RESEARCH.md 완성)
+- [skipped] 07-01-PLAN.md — D-03 컴파일 시뮬레이션
+- [skipped] 07-02-PLAN.md — D-02 감쇄 갭 분석 + D-04 권고안
