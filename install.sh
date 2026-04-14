@@ -218,6 +218,13 @@ if [ -f "$WORKFLOWS_DIR/new-project.md" ]; then
     if grep -q "$KNOWLEDGE_INIT_BLOCK" "$WORKFLOWS_DIR/new-project.md" 2>/dev/null; then
         warn "new-project.md already has .knowledge/ init — skipping"
     else
+        local tmp_file
+        tmp_file="$(mktemp)"
+        awk -v block="$KNOWLEDGE_INIT_BLOCK" '
+            /^git init$/ { print; print block; next }
+            { print }
+        ' "$WORKFLOWS_DIR/new-project.md" > "$tmp_file"
+        mv "$tmp_file" "$WORKFLOWS_DIR/new-project.md"
         info "new-project.md patched (.knowledge/ auto-init)"
     fi
 else
@@ -229,6 +236,13 @@ if [ -f "$WORKFLOWS_DIR/new-milestone.md" ]; then
     if grep -q "$KNOWLEDGE_INIT_BLOCK" "$WORKFLOWS_DIR/new-milestone.md" 2>/dev/null; then
         warn "new-milestone.md already has .knowledge/ init — skipping"
     else
+        local tmp_file
+        tmp_file="$(mktemp)"
+        awk -v block="$KNOWLEDGE_INIT_BLOCK" '
+            /^## 8\. Research Decision$/ { print block; print ""; }
+            { print }
+        ' "$WORKFLOWS_DIR/new-milestone.md" > "$tmp_file"
+        mv "$tmp_file" "$WORKFLOWS_DIR/new-milestone.md"
         info "new-milestone.md patched (.knowledge/ auto-init)"
     fi
 else
