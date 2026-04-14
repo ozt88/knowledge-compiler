@@ -2,7 +2,7 @@
 
 ## Milestones
 
-- **v1.1 Positive Prompt Refactor** - Phases 1-3 (in progress)
+- **v1.1 Positive Prompt Refactor** - Phases 1-7 (in progress)
 
 ## Phases
 
@@ -13,6 +13,10 @@
 - [ ] **Phase 1: Compiler Prompt Refactor** - researcher/verifier 패치 파일의 컴파일러 프롬프트를 긍정형으로 전환
 - [x] **Phase 2: Knowledge Format System** - guardrails.md 신규 도입 및 anti-patterns.md 형식을 원인-결과형으로 재정의 (completed 2026-04-08)
 - [x] **Phase 3: Collection Instruction Refactor** - CLAUDE.md 턴 수집 지시의 부정형 규칙을 긍정형으로 전환 (completed 2026-04-08)
+- [x] **Phase 4: Knowledge Importance Prioritization** - 컴파일러 선별 기준 + index-first 접근 지시 (completed 2026-04-10)
+- [x] **Phase 5: GSD Workflow Stages** - GSD 단계별 knowledge 활동 배분 패치 및 스킬 구현 (completed 2026-04-12)
+- [x] **Phase 6: GSD Knowledge Reference Audit** - GSD 각 단계 knowledge 참조 검증 및 보완 (completed 2026-04-13)
+- [ ] **Phase 7: Knowledge Reinforcement Decay Audit** - 유용한/참조된 지식 증강과 유용하지 않은 지식 감쇄가 잘 동작하고 있는지?
 
 ## Phase Details
 
@@ -124,3 +128,15 @@ Plans:
 | 4. Knowledge Importance Prioritization | v1.1 | 1/1 | Complete | 2026-04-10 |
 | 5. GSD Workflow Stages | v1.1 | 1/1 | Complete | 2026-04-12 |
 | 6. GSD Knowledge Reference Audit | v1.1 | 2/2 | Complete | 2026-04-13 |
+| 7. Knowledge Reinforcement Decay Audit | v1.1 | 0/2 | In progress | — |
+
+### Phase 7: Knowledge Reinforcement Decay Audit
+
+**Goal:** B+C fusion 증강 메커니즘의 실제 동작을 검증하고, 감쇄 메커니즘 현황을 분석하여 자동화 방안 권고안을 도출한다
+**Requirements**: D-01, D-02, D-03, D-04
+**Depends on:** Phase 6
+**Plans:** 2 plans
+
+Plans:
+- [ ] 07-01-PLAN.md — D-03 컴파일 시뮬레이션 (Before/After snapshot + /gsd-knowledge-compile 실행 + B+C fusion 판정)
+- [ ] 07-02-PLAN.md — D-02 감쇄 갭 분석 + D-04 최종 권고안 확정 (RESEARCH.md 완성)
