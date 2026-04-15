@@ -76,6 +76,9 @@ allowed-tools:
 - `guardrails.md` — 대안이 하나로 고정된 케이스 (긍정형 행동으로 작성)
 - `anti-patterns.md` — 문맥에 따라 적절한 접근이 달라지는 케이스 (Observation-Reason-Instead 구조)
 - `troubleshooting.md` — 오류 메시지 ↔ 해법 매핑
+  - 신규 항목 기록 시 마지막 필드 다음 줄에 `**Observed:** 1 times (YYYY-MM-DD)` 포함 (오늘 날짜)
+  - 기존 항목과 **동일한 에러**가 재발하여 raw에서 다시 등장하면: `**Observed:**` 카운터를 1 증가시키고 날짜를 추가: `**Observed:** N times (date1, date2, ...)`
+  - 동일 에러 판별 기준: 에러 제목(`## ...`) 또는 **에러:** 설명이 실질적으로 같은 경우
 - `index.md` — Quick Reference 테이블 + 키워드 인덱스
 
 **B+C fusion 정책:**
