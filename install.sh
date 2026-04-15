@@ -3,11 +3,11 @@
 # Usage: ./install.sh [--project /path/to/project] [--force]
 #
 # What it does:
-#   1. Patches ~/.claude/agents/gsd-phase-researcher.md (Step 0: incremental compile)
-#   2. Patches ~/.claude/agents/gsd-verifier.md (Step 10b: full reconcile)
-#   3. Patches ~/.claude/get-shit-done/workflows/ (new-project, new-milestone: .knowledge/ auto-init)
-#   4. Installs global ~/.claude/CLAUDE.md turn collection instruction
-#   5. Optionally sets up a specific project with .knowledge/ directories
+#   1. Patches ~/.claude/agents/ (researcher, planner, executor, code-reviewer, code-fixer, plan-checker, debugger, nyquist-auditor)
+#   2. Patches ~/.claude/get-shit-done/workflows/ (discuss-phase, new-project, new-milestone: .knowledge/ auto-init)
+#   3. Installs global ~/.claude/CLAUDE.md turn collection instruction
+#   4. Installs GSD skills (gsd-knowledge-compile)
+#   5. Optionally sets up a specific project with .knowledge/ directories + seed files
 #
 # --force: Remove existing patch and re-apply (use after updating patch files)
 
@@ -234,7 +234,6 @@ if [ -f "$WORKFLOWS_DIR/new-project.md" ]; then
     if grep -q "$KNOWLEDGE_INIT_BLOCK" "$WORKFLOWS_DIR/new-project.md" 2>/dev/null; then
         warn "new-project.md already has .knowledge/ init — skipping"
     else
-        local tmp_file
         tmp_file="$(mktemp)"
         awk -v block="$KNOWLEDGE_INIT_BLOCK" '
             /^git init$/ { print; print block; next }
@@ -252,7 +251,6 @@ if [ -f "$WORKFLOWS_DIR/new-milestone.md" ]; then
     if grep -q "$KNOWLEDGE_INIT_BLOCK" "$WORKFLOWS_DIR/new-milestone.md" 2>/dev/null; then
         warn "new-milestone.md already has .knowledge/ init — skipping"
     else
-        local tmp_file
         tmp_file="$(mktemp)"
         awk -v block="$KNOWLEDGE_INIT_BLOCK" '
             /^## 8\. Research Decision$/ { print block; print ""; }
@@ -358,7 +356,7 @@ fi
 echo "=== Done ==="
 echo ""
 echo "Installed:"
-echo "  [global] GSD agent patches (researcher Step 3 lookup, verifier Step 10b, planner fallback compile + lookup)"
+echo "  [global] GSD agent patches (researcher/planner/executor/code-reviewer/code-fixer/plan-checker/debugger/nyquist-auditor)"
 echo "  [global] GSD workflow patches (new-project, new-milestone auto-init)"
 echo "  [global] discuss-phase knowledge lookup"
 echo "  [global] GSD skills (gsd-knowledge-compile)"
