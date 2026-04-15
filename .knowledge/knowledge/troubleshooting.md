@@ -1,6 +1,7 @@
 # Troubleshooting
 
 ## install.sh — PATCH 마커 존재 시 패치 미반영
+[context: install-deploy]
 
 **에러:** Phase 2 이후 패치 내용이 에이전트 파일(gsd-phase-researcher.md, gsd-verifier.md)에 반영되지 않음
 **원인:** install.sh의 patch_agent()가 PATCH 마커 존재 시 무조건 skip
@@ -9,6 +10,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## gsd-tools phase add — 백로그 항목 Phase 번호 오인
+[context: scope-backlog]
 
 **에러:** /gsd:add-phase 실행 시 의도한 번호(4)가 아닌 1000이 할당됨
 **원인:** Phase 999.1 백로그 항목을 gsd-tools가 999로 인식하여 최대 정수 카운트에 포함
@@ -17,6 +19,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## Phase 검증 — 부정형 패턴 grep 음성인데 코드 미반영
+[context: install-deploy, compile-logic]
 
 **에러:** feat 커밋 검증은 통과했으나 이후 docs 커밋이 패치 파일을 이전 상태로 교체
 **원인:** docs 커밋 stat에 패치 파일이 포함되지 않아 변경 사실이 눈에 띄지 않음
@@ -25,6 +28,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## install.sh --force 인수 파싱 순서 버그
+[context: install-deploy]
 
 **에러:** install.sh --force 실행 시 FORCE가 항상 false로 동작하여 기존 패치 재적용 불가
 **원인:** argument 파싱 블록(`while [[ $# -gt 0 ]]`)이 patch_agent() 호출 이후에 위치
@@ -33,6 +37,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## install.sh awk -v 멀티라인 변수 개행 소실
+[context: install-deploy]
 
 **에러:** patch_workflow()에서 awk -v patch="$patch_content" 로 멀티라인 내용 전달 시 개행이 소실되어 패치 내용이 한 줄로 플래트닝됨
 **원인:** awk -v 변수 할당에서 개행(\n) 문자가 보존되지 않는 동작
@@ -42,6 +47,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## install.sh --force가 CLAUDE.md를 stale 내용으로 덮어씀
+[context: install-deploy]
 
 **에러:** templates/claude-md-section.md 업데이트 전에 install.sh --force 실행 시 CLAUDE.md의 최신 내용이 구버전으로 덮어써짐
 **원인:** install.sh --force는 templates/claude-md-section.md 내용을 CLAUDE.md에 삽입. template 파일이 구버전이면 최신 CLAUDE.md 변경이 유실
@@ -50,6 +56,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## gsd-clear/gsd-knowledge-compile — last_raw_captured UTC 타임존 불일치
+[context: compile-logic]
 
 **에러:** Step 0 실행 시 항상 "nothing to record" — JSONL 항목이 cutoff보다 이전으로 판정
 **원인:** `last_raw_captured`를 현재 벽시계 시각(KST)을 UTC 포맷으로 그대로 기록. KST 22:10을 22:10Z로 저장하면 실제 UTC(13:10Z)보다 9시간 미래 값이 됨. JSONL 타임스탬프는 순수 UTC이므로 항상 cutoff보다 이전
@@ -58,6 +65,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## install.sh unpatch_agent — <!-- PATCH --> 주석 블록 제거 불가
+[context: install-deploy]
 
 **에러:** `install.sh --force` 실행 시 researcher/planner PATCH 블록이 제거되지 않고 재삽입 → 중복 증가
 **원인:** `unpatch_agent` awk가 `## Step 0: Knowledge Compile` / `## Step 10b: Knowledge Reconcile` 헤더 기반으로 블록 감지. researcher/planner 패치는 `<!-- PATCH:knowledge-compiler -->` 주석으로 시작하므로 패턴 매칭 불가
@@ -66,6 +74,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## install.sh patch_workflow — 앵커 미매칭 시 무음 실패
+[context: install-deploy]
 
 **에러:** `install.sh` 실행 후 discuss-phase.md에 PATCH 마커 미삽입 (count=0), install.sh는 "patched" 출력
 **원인:** `patch_workflow` 앵커(`<step name="load_prior_context">`)가 실제 파일에 존재하지 않음. awk가 한 번도 매칭되지 않고 파일을 그대로 출력. 성공/실패 감지 로직 없음
@@ -74,6 +83,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## install.sh patch_agent — planner 패치 마커 미삽입 (매번 재패치 시도)
+[context: install-deploy]
 
 **에러:** `install.sh` 실행 후 `gsd-planner.md`에 PATCH 마커 count=0. install.sh는 "patched" 출력하지만 `grep -q "PATCH:knowledge-compiler"` 다음 실행 시 또 "patched" 반복
 **원인:** `gsd-planner.patch.md`의 line 3(tail -n +3 이후 첫 줄)에 `<!-- PATCH:knowledge-compiler -->` 마커가 없음. 삽입된 내용에 마커가 포함되지 않아 `patch_agent` 중복 체크가 매번 실패
@@ -82,6 +92,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## gsd-knowledge-compile 스킬 — "Unknown skill" 오류
+[context: install-deploy]
 
 **에러:** `/gsd-knowledge-compile` 실행 시 "Unknown skill" 메시지로 스킬을 찾지 못함
 **원인:** `install.sh`가 스킬 파일을 `skill.md`(소문자)로 복사했으나 Claude Code는 `SKILL.md`(대문자)만 인식
@@ -90,6 +101,7 @@
 **Observed:** 1 times (2026-04-15)
 
 ## gap closure 실행 중 git reset --soft로 인한 파일 삭제
+[context: install-deploy, agent-behavior]
 
 **에러:** gap closure plan 실행(05-02) 중 Task 1 커밋이 Phase 5 구현 파일(patches, skills, install.sh)을 전부 삭제
 **원인:** 이전 세션의 `git reset --soft` 연산이 남긴 staged deletions이 첫 커밋에 포함됨. reset --soft는 working tree 파일은 유지하지만 index(staged) 상태를 변경하여 이전 브랜치의 삭제 상태가 staged로 남음
