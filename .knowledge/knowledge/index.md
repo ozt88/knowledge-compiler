@@ -1,6 +1,6 @@
 # Knowledge Index
 
-**Last compiled:** 2026-04-13
+**Last compiled:** 2026-04-15
 **Total entries:** 49 (decisions: 16, guardrails: 12, anti-patterns: 7, troubleshooting: 10, +4 updated)
 
 ## Quick Reference
@@ -29,6 +29,8 @@ knowledge-compiler 프로젝트(v1.1 Positive Prompt Refactor)의 5개 Phase 진
 **Phase 5 후속 — Knowledge 수집 방식 재설계:** CLAUDE.md per-turn 수집 지시 제거. /gsd-clear와 /gsd-knowledge-compile에 Step 0(last_raw_captured 기준 세션 요약 → raw 기록) 추가. compile-manifest.json에 last_raw_captured 필드 신설로 중복 방지.
 
 **Phase 6 (GSD Knowledge Reference Audit):** PATCH 마커 중복 삽입 발견(researcher×6, planner×6, verifier×8) + discuss-phase 미설치(앵커 `load_prior_context` 부재 무음 실패). verifier 패치 전체 제거 결정(count=0) — compile/lookup 불필요. planner fallback compile 제거. GSD 최소 부하 원칙 확립: researcher/planner/discuss만 lookup(×1), compile은 /gsd-knowledge-compile 수동 전용. Python으로 중복 제거, 올바른 앵커(`check_existing`) 적용. unpatch_agent awk가 `<!-- PATCH -->` 주석 블록 처리 불가 → Python 필수 우회 경로 확립.
+
+**Phase 8 (Knowledge Record & Retrieve Design):** decisions.md 항목에 context 태그와 Observed 메타데이터 소급 적용. 상태 태그를 제목 줄 다음으로 이동하여 조회 효율성 개선. 6개 카테고리(file-loading, agent-behavior, knowledge-format, compile-logic, install-deploy, scope-backlog)로 항목 분류 완료.
 
 ## 키워드 인덱스
 
