@@ -104,11 +104,19 @@ Plans:
 
 **Goal:** 기록 메타데이터 설계, 증강/감쇄 구현, 조회 활용 개선을 통합 설계한다
 **Depends on:** Phase 7
-**Requirements**: TBD (Phase 7 완료 후 확정)
-**Plans:** 0 plans
+**Requirements**: D-01, D-02, D-03, D-04
+**Success Criteria** (what must be TRUE):
+  1. decisions.md의 모든 항목이 `[상태] [context: ...]` 메타데이터 형식을 갖는다
+  2. SKILL.md Step 5의 B+C fusion 정책에 충돌 기반 decay([uncertain] 상태 전환)가 포함된다
+  3. 패치 파일(researcher/planner/discuss)에 [uncertain]/[superseded] 처리 지침과 조회 우선순위가 명시된다
+  4. B+C fusion 시뮬레이션에서 Observed 카운터 증가와 conflict/uncertain 전환이 정상 동작한다
+  5. install.sh 재배포 후 PATCH count가 researcher=1, planner=1, discuss=1이다
+**Plans:** 3 plans
 
 Plans:
-- [ ] TBD (run /gsd-plan-phase 8 after Phase 7 completes)
+- [ ] 08-01-PLAN.md — context 태그 형식 확정 + decisions.md 15개 항목 메타데이터 소급 적용
+- [ ] 08-02-PLAN.md — SKILL.md uncertain 전환 + 패치 파일 조회 지침 + install.sh 재배포
+- [ ] 08-03-PLAN.md — B+C fusion 시뮬레이션 + 전체 검증
 
 ## Backlog
 
@@ -140,7 +148,7 @@ Plans:
 | 5. GSD Workflow Stages | v1.1 | 1/1 | Complete | 2026-04-12 |
 | 6. GSD Knowledge Reference Audit | v1.1 | 2/2 | Complete | 2026-04-13 |
 | 7. Knowledge Reinforcement Decay Audit | v1.1 | 0/2 | Skipped | 2026-04-14 |
-| 8. Knowledge Record & Retrieve Design | v1.2 | 0/0 | Planned | — |
+| 8. Knowledge Record & Retrieve Design | v1.2 | 0/3 | Planned | — |
 
 ### Phase 7: Knowledge Reinforcement Decay Audit
 
