@@ -35,6 +35,7 @@ error() { echo -e "${RED}[✗]${NC} $1"; }
 # Remove existing patch block between two markers from an agent file
 unpatch_agent() {
     local agent_file="$1"
+    local patch_file="$2"
     local agent_name
     agent_name="$(basename "$agent_file")"
 
@@ -42,16 +43,26 @@ unpatch_agent() {
         return 0
     fi
 
-    # Find the patch block: starts at the line containing the section header
-    # immediately before the marker, ends at the next top-level ## heading
-    # Strategy: remove lines from "## Step 0:" or "## Step 10b:" up to (but not
-    # including) the next "## Step " heading that does NOT contain PATCH_MARKER.
+    # Remove ALL occurrences of the patch content from the agent file.
+    # Strategy: remove every line that matches the patch marker comment,
+    # plus the exact number of lines that follow each marker (patch body size).
+    local patch_content
+    patch_content="$(tail -n +3 "$patch_file")"
+    local patch_line_count
+    patch_line_count=$(echo "$patch_content" | wc -l)
+
     local tmp_file
     tmp_file="$(mktemp)"
-    awk '
-        /## Step 0: Knowledge Compile|## Step 10b: Knowledge Reconcile/ { skip=1 }
-        skip && /^## / && !/Knowledge Compile|Knowledge Reconcile/ { skip=0 }
-        !skip { print }
+    # Remove each patch block: detect marker line by index(), skip lines after it.
+    # patch_content structure (tail -n +3): blank(line1), MARKER(line2), content(line3..N).
+    # patch_agent inserts all block_size lines then adds one trailing blank (print "").
+    # The MARKER line itself is consumed by next. After next, remaining lines to skip:
+    #   (block_size - 2) content lines after marker + 1 trailing blank = block_size - 1.
+    # When already skipping, ignore nested markers (patch content may contain the marker string).
+    awk -v marker="<!-- ${PATCH_MARKER}" -v block_size="$patch_line_count" '
+        skip == 0 && index($0, marker) > 0 { skip = block_size - 1; next }
+        skip > 0 { skip--; next }
+        { print }
     ' "$agent_file" > "$tmp_file"
     mv "$tmp_file" "$agent_file"
     warn "$agent_name existing patch removed (--force)"
@@ -71,7 +82,7 @@ patch_agent() {
 
     if grep -q "$PATCH_MARKER" "$agent_file" 2>/dev/null; then
         if [ "$FORCE" = true ]; then
-            unpatch_agent "$agent_file"
+            unpatch_agent "$agent_file" "$patch_file"
         else
             warn "$agent_name already patched — skipping (use --force to re-apply)"
             return 0
@@ -109,13 +120,18 @@ patch_workflow() {
 
     if grep -q "$PATCH_MARKER" "$workflow_file" 2>/dev/null; then
         if [ "$FORCE" = true ]; then
-            # Remove existing patch block
+            # Remove ALL occurrences of the patch content from the workflow file.
+            local patch_content_rm
+            patch_content_rm="$(tail -n +3 "$patch_file")"
+            local patch_line_count_rm
+            patch_line_count_rm=$(echo "$patch_content_rm" | wc -l)
+
             local tmp_file
             tmp_file="$(mktemp)"
-            awk -v marker="$PATCH_MARKER" '
-                $0 ~ marker { found=1; next }
-                found && /^## / { found=0 }
-                !found { print }
+            awk -v marker="<!-- ${PATCH_MARKER}" -v block_size="$patch_line_count_rm" '
+                skip == 0 && index($0, marker) > 0 { skip = block_size - 1; next }
+                skip > 0 { skip--; next }
+                { print }
             ' "$workflow_file" > "$tmp_file"
             mv "$tmp_file" "$workflow_file"
             warn "$workflow_name existing patch removed (--force)"
@@ -207,11 +223,11 @@ echo "--- Patching GSD workflows ---"
 
 KNOWLEDGE_INIT_BLOCK='mkdir -p .knowledge/raw .knowledge/knowledge'
 
-# discuss-phase.md: knowledge lookup before load_prior_context
+# discuss-phase.md: knowledge lookup before cross_reference_todos (after init/antipattern checks)
 patch_workflow \
     "$WORKFLOWS_DIR/discuss-phase.md" \
     "$SCRIPT_DIR/patches/gsd-discuss-phase.patch.md" \
-    "<step name=\"check_existing\">"
+    "<step name=\"cross_reference_todos\">"
 
 # new-project.md: insert after "git init"
 if [ -f "$WORKFLOWS_DIR/new-project.md" ]; then
