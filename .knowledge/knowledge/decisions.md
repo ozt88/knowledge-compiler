@@ -14,7 +14,7 @@
 **시도:** 에이전트가 knowledge/ 전체를 순차 로드
 **결과:** 컨텍스트 비용이 높고 관련 없는 정보까지 로드됨
 **결정:** index.md를 먼저 읽어 관련 파일만 선택적으로 Read하는 index-first 접근 표준화 (RELEVANCE-03)
-**Observed:** 1 times (2026-04-10)
+**Observed:** 2 times (2026-04-10, 2026-04-15)
 
 ## 설계 결정 — 컴파일 타임 선별 기준 도입
 [active] [context: compile-logic]
@@ -97,12 +97,14 @@
 **Observed:** 1 times (2026-04-12)
 
 ## 설계 결정 — GSD 프로세스 knowledge 최소 부하 원칙 (Phase 6)
-[active] [context: agent-behavior]
+[uncertain] [context: agent-behavior] [conflict: 2026-04-15]
 
 **시도:** researcher/planner/verifier 모두 knowledge compile 또는 lookup 수행. planner에는 fallback compile 포함
 **결과:** compile에 과도한 시간·토큰 소비. verifier 역할(결과 확인)에는 knowledge 불필요. fallback compile은 품질 낮은 자동 처리
 **결정:** lookup은 researcher/planner/discuss에만 유지 (PATCH 마커 각 1개). verifier 패치 전체 제거(count=0). planner fallback compile 제거. compile = /gsd-knowledge-compile 수동 전용
 **Observed:** 1 times (2026-04-13)
+
+> **New (2026-04-15):** planner 자동 compile이 더 신뢰성 있을 수 있다는 관점 — /gsd-knowledge-compile 수동 전용보다 GSD 에이전트 자동 compile 빈도 향상이 효과적일 수 있음. 직접적 모순: 수동 전용 결정에 반함.
 
 ## 설계 결정 — 갭 클로저 플랜 패턴 (implementation 후 docs 정렬)
 [active] [context: agent-behavior]

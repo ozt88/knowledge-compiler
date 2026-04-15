@@ -45,6 +45,10 @@ CLAUDE.md의 Knowledge Compiler 섹션 내용을 변경할 경우 templates/clau
 
 `~/.claude/CLAUDE.md`의 Knowledge Compiler 섹션은 전역 적용이므로 개별 프로젝트 CLAUDE.md에 중복 추가 불필요. 프로젝트 설치는 `.knowledge/raw/` + `.knowledge/knowledge/` 디렉토리 생성으로 완료.
 
+## decisions.md 제목 변경 시 index.md 동시 갱신
+
+decisions.md 항목 제목을 변경할 경우 `index.md` 키워드 인덱스의 fragment ID도 즉시 동시에 업데이트한다 — 제목 변경과 index.md 갱신은 단일 커밋으로 처리.
+
 ## install.sh 실행 후 PATCH count 즉시 확인
 
 install.sh 실행(--force 포함) 후 즉시 `grep -c "PATCH:knowledge-compiler" <file>` 로 각 대상 파일 count를 확인한다. 기대값: researcher=1, planner=1, verifier=0, discuss=1. count가 기대값과 다르면 Python 수동 제거 후 재시도.

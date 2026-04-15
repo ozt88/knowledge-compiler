@@ -71,6 +71,13 @@
 **해결:** 삽입 시 마커 주석을 content 앞에 수동으로 추가: `<!-- PATCH:knowledge-compiler — reapply after GSD updates -->`를 patch_content 앞에 붙여 Edit 또는 Python으로 직접 삽입
 **파일:** patches/gsd-planner.patch.md (line 3에 PATCH 마커 없음), ~/.claude/agents/gsd-planner.md
 
+## gsd-knowledge-compile 스킬 — "Unknown skill" 오류
+
+**에러:** `/gsd-knowledge-compile` 실행 시 "Unknown skill" 메시지로 스킬을 찾지 못함
+**원인:** `install.sh`가 스킬 파일을 `skill.md`(소문자)로 복사했으나 Claude Code는 `SKILL.md`(대문자)만 인식
+**해결:** `git mv skills/gsd-knowledge-compile/skill.md skills/gsd-knowledge-compile/SKILL.md` 후 install.sh 복사 경로도 대문자로 수정. 설치된 파일도 rename.
+**파일:** `skills/gsd-knowledge-compile/SKILL.md`, `install.sh` (install_skill 함수)
+
 ## gap closure 실행 중 git reset --soft로 인한 파일 삭제
 
 **에러:** gap closure plan 실행(05-02) 중 Task 1 커밋이 Phase 5 구현 파일(patches, skills, install.sh)을 전부 삭제

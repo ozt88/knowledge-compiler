@@ -1,7 +1,7 @@
 # Knowledge Index
 
 **Last compiled:** 2026-04-15
-**Total entries:** 49 (decisions: 16, guardrails: 12, anti-patterns: 7, troubleshooting: 10, +4 updated)
+**Total entries:** 52 (decisions: 16, guardrails: 13, anti-patterns: 7, troubleshooting: 11, +3 updated)
 
 ## Quick Reference
 
@@ -30,7 +30,7 @@ knowledge-compiler 프로젝트(v1.1 Positive Prompt Refactor)의 5개 Phase 진
 
 **Phase 6 (GSD Knowledge Reference Audit):** PATCH 마커 중복 삽입 발견(researcher×6, planner×6, verifier×8) + discuss-phase 미설치(앵커 `load_prior_context` 부재 무음 실패). verifier 패치 전체 제거 결정(count=0) — compile/lookup 불필요. planner fallback compile 제거. GSD 최소 부하 원칙 확립: researcher/planner/discuss만 lookup(×1), compile은 /gsd-knowledge-compile 수동 전용. Python으로 중복 제거, 올바른 앵커(`check_existing`) 적용. unpatch_agent awk가 `<!-- PATCH -->` 주석 블록 처리 불가 → Python 필수 우회 경로 확립.
 
-**Phase 8 (Knowledge Record & Retrieve Design):** decisions.md 항목에 context 태그와 Observed 메타데이터 소급 적용. 상태 태그를 제목 줄 다음으로 이동하여 조회 효율성 개선. 6개 카테고리(file-loading, agent-behavior, knowledge-format, compile-logic, install-deploy, scope-backlog)로 항목 분류 완료.
+**Phase 8 (Knowledge Record & Retrieve Design):** decisions.md 항목에 context 태그와 Observed 메타데이터 소급 적용. 상태 태그를 제목 줄 다음으로 이동하여 조회 효율성 개선. 6개 카테고리(file-loading, agent-behavior, knowledge-format, compile-logic, install-deploy, scope-backlog)로 항목 분류 완료. B+C fusion 시뮬레이션: "index-first 접근 표준화" Observed 2 times(증강 확인), "GSD 최소 부하 원칙" [uncertain]+[conflict: 2026-04-15](감쇄 확인).
 
 ## 키워드 인덱스
 
@@ -65,3 +65,7 @@ knowledge-compiler 프로젝트(v1.1 Positive Prompt Refactor)의 5개 Phase 진
 | PATCH count | guardrails.md#installsh-실행-후-patch-count-즉시-확인 |
 | GSD 최소 부하 | decisions.md#설계-결정--gsd-프로세스-knowledge-최소-부하-원칙-phase-6 |
 | verifier 패치 | decisions.md#설계-결정--gsd-프로세스-knowledge-최소-부하-원칙-phase-6 |
+| uncertain | decisions.md#설계-결정--gsd-프로세스-knowledge-최소-부하-원칙-phase-6 |
+| conflict | decisions.md#설계-결정--gsd-프로세스-knowledge-최소-부하-원칙-phase-6 |
+| SKILL.md | troubleshooting.md#gsd-knowledge-compile-스킬--unknown-skill-오류 |
+| fragment ID | guardrails.md#decisionsmd-제목-변경-시-indexmd-동시-갱신 |
