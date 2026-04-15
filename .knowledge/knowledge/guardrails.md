@@ -65,3 +65,8 @@ decisions.md 항목 제목을 변경할 경우 `index.md` 키워드 인덱스의
 [context: install-deploy]
 
 install.sh 실행(--force 포함) 후 즉시 `grep -c "PATCH:knowledge-compiler" <file>` 로 각 대상 파일 count를 확인한다. 기대값: researcher=1, planner=1, verifier=0, discuss=1. count가 기대값과 다르면 Python 수동 제거 후 재시도.
+
+## knowledge seed 파일 — universal meta-knowledge 전용
+[context: install-deploy, knowledge-format]
+
+templates/knowledge-seed/ 파일에는 어느 프로젝트에나 적용되는 meta-knowledge만 포함한다. 이 repo 고유 지식(install.sh 버그, GSD Phase 번호, PATCH count 등)은 이 repo의 .knowledge/knowledge/ 에만 기록한다.

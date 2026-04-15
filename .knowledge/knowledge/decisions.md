@@ -106,6 +106,22 @@
 
 > **New (2026-04-15):** planner 자동 compile이 더 신뢰성 있을 수 있다는 관점 — /gsd-knowledge-compile 수동 전용보다 GSD 에이전트 자동 compile 빈도 향상이 효과적일 수 있음. 직접적 모순: 수동 전용 결정에 반함.
 
+## 설계 결정 — context 태그와 Observed 전체 knowledge 파일 확장
+[active] [context: knowledge-format]
+
+**시도:** context 태그와 Observed 메타데이터를 decisions.md에만 적용
+**결과:** anti-patterns.md, troubleshooting.md의 재발 빈도·적용 영역 파악이 어려움
+**결정:** guardrails.md에 context 태그만 추가(Observed 불필요 — binary 제약, 신뢰도 카운터 의미 없음). anti-patterns.md + troubleshooting.md에 context 태그 + Observed 모두 추가(재발 빈도 추적 유의미). SKILL.md Step 5에 이 규칙 반영
+**Observed:** 1 times (2026-04-15)
+
+## 설계 결정 — knowledge seed 파일 universal meta-knowledge 전략
+[active] [context: install-deploy, knowledge-format]
+
+**시도:** install.sh --project가 .knowledge/knowledge/ 디렉토리만 생성 (파일 없음)
+**결과:** 첫 컴파일 시 decisions.md/guardrails.md 등의 형식 보장 불가, 에이전트가 빈 디렉토리 접근
+**결정:** templates/knowledge-seed/ 에 5개 파일 생성. 포함 기준: 어느 프로젝트에나 적용되는 universal meta-knowledge만(index-first, raw 직접 쿼리 anti-pattern, 부정형 지시 금지 등). 제외: 이 repo 고유 지식. install.sh --project 실행 시 파일 없을 때만 복사
+**Observed:** 1 times (2026-04-15)
+
 ## 설계 결정 — 갭 클로저 플랜 패턴 (implementation 후 docs 정렬)
 [active] [context: agent-behavior]
 

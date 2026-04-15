@@ -15,7 +15,7 @@
     ".knowledge/raw/2026-04-12.md": 1776005758,
     ".knowledge/raw/2026-04-13.md": 1776151980,
     ".knowledge/raw/2026-04-14.md": 1776217855,
-    ".knowledge/raw/2026-04-15.md": 1776238379,
+    ".knowledge/raw/2026-04-15.md": 1776246644,
     ".planning/debug/knowledge-compilation-not-working.md": 1775825277,
     ".planning/phases/01-compiler-prompt-refactor/01-01-PLAN.md": 1775825277,
     ".planning/phases/01-compiler-prompt-refactor/01-01-SUMMARY.md": 1775825277,
@@ -64,6 +64,20 @@
     ".planning/REQUIREMENTS.md": 1775971988,
     ".planning/ROADMAP.md": 1776002652,
     ".planning/STATE.md": 1776002662,
-    ".planning/v1.1-MILESTONE-AUDIT.md": 1775825277
+    ".planning/v1.1-MILESTONE-AUDIT.md": 1775825277,
+    ".planning/phases/08-knowledge-record-retrieve-design/08-CONTEXT.md": 1776158449,
+    ".planning/phases/08-knowledge-record-retrieve-design/08-RESEARCH.md": 1776218894,
+    ".planning/phases/08-knowledge-record-retrieve-design/08-VALIDATION.md": 1776218899,
+    ".planning/phases/08-knowledge-record-retrieve-design/08-01-PLAN.md": 1776218059,
+    ".planning/phases/08-knowledge-record-retrieve-design/08-01-SUMMARY.md": 1776236759,
+    ".planning/phases/08-knowledge-record-retrieve-design/08-02-PLAN.md": 1776218909,
+    ".planning/phases/08-knowledge-record-retrieve-design/08-02-SUMMARY.md": 1776238356,
+    ".planning/phases/08-knowledge-record-retrieve-design/08-03-PLAN.md": 1776218921,
+    ".planning/phases/08-knowledge-record-retrieve-design/08-03-SUMMARY.md": 1776239498,
+    ".planning/phases/08-knowledge-record-retrieve-design/08-UAT.md": 1776240812,
+    ".planning/quick/260413-o4d-skill-md-skill-md/SUMMARY.md": 1776068591,
+    ".planning/quick/260414-mx1-install-sh-gsd-planner-md/SUMMARY.md": 1776151965,
+    ".planning/quick/260415-oi4-troubleshooting-md-observed-skill-md/260415-oi4-PLAN.md": 1776242386,
+    ".planning/quick/260415-os2-anti-patterns-guardrails-troubleshooting/260415-os2-PLAN.md": 1776243210
   }
 }

@@ -1,16 +1,16 @@
 # Knowledge Index
 
 **Last compiled:** 2026-04-15
-**Total entries:** 52 (decisions: 16, guardrails: 13, anti-patterns: 7, troubleshooting: 11, +3 updated)
+**Total entries:** 56 (decisions: 18, guardrails: 14, anti-patterns: 7, troubleshooting: 12)
 
 ## Quick Reference
 
 | 주제 | 파일 | 핵심 항목 |
 |------|------|-----------|
-| 설계 결정 (D-03, D-05, D-08 등) | decisions.md | guardrails/anti-patterns 분리, index-first 접근, D-08 동일성, PageIndex backlog, spec→implementation 전환+ROADMAP 동기화, researcher compile 제거→GSD 최소 부하 원칙, gap closure 플랜 패턴, knowledge raw 수집 명시적 전환, JSONL 참조율 측정 |
-| 절대적 규칙 / 긍정형 액션 | guardrails.md | raw/ 읽기 경유 필수, D-08 블록 동일성(Phase 6 후 범위 축소), index.md 형식, 부정형 지시 금지, git push 승인, ROADMAP-PLAN 동기화, knowledge raw 수집 per-turn, templates 동기화, install.sh 실행 후 PATCH count 확인 필수 |
+| 설계 결정 (D-03, D-05, D-08 등) | decisions.md | guardrails/anti-patterns 분리, index-first 접근, D-08 동일성, PageIndex backlog, spec→implementation 전환+ROADMAP 동기화, researcher compile 제거→GSD 최소 부하 원칙, gap closure 플랜 패턴, knowledge raw 수집 명시적 전환, JSONL 참조율 측정, context/Observed 전체 파일 확장, knowledge seed universal 전략 |
+| 절대적 규칙 / 긍정형 액션 | guardrails.md | raw/ 읽기 경유 필수, D-08 블록 동일성(Phase 6 후 범위 축소), index.md 형식, 부정형 지시 금지, git push 승인, ROADMAP-PLAN 동기화, knowledge raw 수집 per-turn, templates 동기화, install.sh 실행 후 PATCH count 확인 필수, knowledge seed 파일 universal-only |
 | 맥락 의존적 주의사항 | anti-patterns.md | raw/ 직접 쿼리, docs 커밋 revert, gsd-tools 번호 버그, install.sh workflow 핸들러 스텁, gap closure staged deletion 미확인, Python PATCH 정리 후 --force 재실행 금지 |
-| 에러 → 해결 매핑 | troubleshooting.md | install.sh skip 버그, --force 인수 파싱 순서, awk -v 개행 소실, phase add 번호 오인, 검증 통과 후 revert, gap closure git reset --soft 파일 삭제, unpatch_agent 주석 블록 제거 불가, patch_workflow 앵커 무음 실패 |
+| 에러 → 해결 매핑 | troubleshooting.md | install.sh skip 버그, --force 인수 파싱 순서, awk -v 개행 소실, phase add 번호 오인, 검증 통과 후 revert, gap closure git reset --soft 파일 삭제, unpatch_agent 주석 블록 제거 불가, patch_workflow 앵커 무음 실패, local 함수 밖 사용 set -e 크래시 |
 
 ## 전체 요약
 
@@ -30,7 +30,7 @@ knowledge-compiler 프로젝트(v1.1 Positive Prompt Refactor)의 5개 Phase 진
 
 **Phase 6 (GSD Knowledge Reference Audit):** PATCH 마커 중복 삽입 발견(researcher×6, planner×6, verifier×8) + discuss-phase 미설치(앵커 `load_prior_context` 부재 무음 실패). verifier 패치 전체 제거 결정(count=0) — compile/lookup 불필요. planner fallback compile 제거. GSD 최소 부하 원칙 확립: researcher/planner/discuss만 lookup(×1), compile은 /gsd-knowledge-compile 수동 전용. Python으로 중복 제거, 올바른 앵커(`check_existing`) 적용. unpatch_agent awk가 `<!-- PATCH -->` 주석 블록 처리 불가 → Python 필수 우회 경로 확립.
 
-**Phase 8 (Knowledge Record & Retrieve Design):** decisions.md 항목에 context 태그와 Observed 메타데이터 소급 적용. 상태 태그를 제목 줄 다음으로 이동하여 조회 효율성 개선. 6개 카테고리(file-loading, agent-behavior, knowledge-format, compile-logic, install-deploy, scope-backlog)로 항목 분류 완료. B+C fusion 시뮬레이션: "index-first 접근 표준화" Observed 2 times(증강 확인), "GSD 최소 부하 원칙" [uncertain]+[conflict: 2026-04-15](감쇄 확인).
+**Phase 8 (Knowledge Record & Retrieve Design):** decisions.md 항목에 context 태그와 Observed 메타데이터 소급 적용. 상태 태그를 제목 줄 다음으로 이동하여 조회 효율성 개선. 6개 카테고리(file-loading, agent-behavior, knowledge-format, compile-logic, install-deploy, scope-backlog)로 항목 분류 완료. B+C fusion 시뮬레이션: "index-first 접근 표준화" Observed 2 times(증강 확인), "GSD 최소 부하 원칙" [uncertain]+[conflict: 2026-04-15](감쇄 확인). Phase 8 UAT 7/7 pass. context/Observed를 전체 knowledge 파일(anti-patterns, troubleshooting)로 확장 결정. install.sh --project 시 templates/knowledge-seed/ 5개 파일 자동 복사 추가(universal meta-knowledge 전용). install.sh `local` 함수 밖 사용 버그(set -e 크래시) 수정.
 
 ## 키워드 인덱스
 
@@ -69,3 +69,8 @@ knowledge-compiler 프로젝트(v1.1 Positive Prompt Refactor)의 5개 Phase 진
 | conflict | decisions.md#설계-결정--gsd-프로세스-knowledge-최소-부하-원칙-phase-6 |
 | SKILL.md | troubleshooting.md#gsd-knowledge-compile-스킬--unknown-skill-오류 |
 | fragment ID | guardrails.md#decisionsmd-제목-변경-시-indexmd-동시-갱신 |
+| context 태그 | decisions.md#설계-결정--context-태그와-observed-전체-knowledge-파일-확장 |
+| Observed | decisions.md#설계-결정--context-태그와-observed-전체-knowledge-파일-확장, anti-patterns.md, troubleshooting.md |
+| seed | decisions.md#설계-결정--knowledge-seed-파일-universal-meta-knowledge-전략, guardrails.md#knowledge-seed-파일--universal-meta-knowledge-전용 |
+| local | troubleshooting.md#installsh--local-키워드-함수-밖-사용-set--e-크래시 |
+| set -e | troubleshooting.md#installsh--local-키워드-함수-밖-사용-set--e-크래시 |

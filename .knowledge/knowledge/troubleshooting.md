@@ -100,6 +100,15 @@
 **파일:** `skills/gsd-knowledge-compile/SKILL.md`, `install.sh` (install_skill 함수)
 **Observed:** 1 times (2026-04-15)
 
+## install.sh — local 키워드 함수 밖 사용 (set -e 크래시)
+[context: install-deploy]
+
+**에러:** `install.sh --project` 실행 시 새 환경에서 즉시 종료. "line N: local: can only be used in a function" 출력
+**원인:** new-project.md / new-milestone.md 패치 블록의 `local tmp_file="$(mktemp)"` 선언이 함수 바깥에 위치. bash `set -e` 환경에서 `local`은 함수 밖에서 exit code 1 반환 → 스크립트 즉시 종료
+**해결:** `local` 키워드 제거, `tmp_file="$(mktemp)"` 로 변경 (함수 밖에서는 단순 변수 할당)
+**파일:** install.sh (237행, 255행 — new-project.md / new-milestone.md 패치 블록)
+**Observed:** 1 times (2026-04-15)
+
 ## gap closure 실행 중 git reset --soft로 인한 파일 삭제
 [context: install-deploy, agent-behavior]
 
