@@ -333,6 +333,25 @@ if [ -n "$PROJECT_DIR" ]; then
     mkdir -p "$PROJECT_DIR/.knowledge/raw" "$PROJECT_DIR/.knowledge/knowledge"
     info ".knowledge/ directories created"
 
+    # Seed knowledge files (skip if already exist)
+    SEED_DIR="$SCRIPT_DIR/templates/knowledge-seed"
+    if [ -d "$SEED_DIR" ]; then
+        seeded=0
+        for seed_file in "$SEED_DIR"/*.md; do
+            fname="$(basename "$seed_file")"
+            dst="$PROJECT_DIR/.knowledge/knowledge/$fname"
+            if [ ! -f "$dst" ]; then
+                cp "$seed_file" "$dst"
+                seeded=$((seeded + 1))
+            fi
+        done
+        if [ "$seeded" -gt 0 ]; then
+            info "knowledge seed files copied ($seeded files)"
+        else
+            warn "knowledge seed files already exist — skipping"
+        fi
+    fi
+
     echo ""
 fi
 
@@ -345,7 +364,7 @@ echo "  [global] discuss-phase knowledge lookup"
 echo "  [global] GSD skills (gsd-knowledge-compile)"
 echo "  [global] ~/.claude/CLAUDE.md turn collection instruction"
 if [ -n "$PROJECT_DIR" ]; then
-echo "  [project] $PROJECT_DIR/.knowledge/ directories"
+echo "  [project] $PROJECT_DIR/.knowledge/ directories + seed files"
 fi
 echo ""
 echo "After GSD updates, re-run: ./install.sh --force"
