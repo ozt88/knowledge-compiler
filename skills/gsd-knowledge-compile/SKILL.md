@@ -60,15 +60,34 @@ allowed-tools:
 - 이미 존재하는 중복 항목
 
 **파일별 업데이트:**
-- `decisions.md` — Attempt → Result → Decision (status: `[active]`, `[rejected]`, `[superseded]`, `[uncertain]`)
+- `decisions.md` — 신규 항목 형식:
+  ```
+  ## 설계 결정 — [제목]
+  [active] [context: tag1, tag2]
+
+  **시도:** [...]
+  **결과:** [...]
+  **결정:** [...]
+  **Observed:** 1 times (YYYY-MM-DD)
+  ```
+  - `[context: ...]` 태그는 항목의 적용 영역을 나타낸다. 카테고리: `file-loading`, `agent-behavior`, `knowledge-format`, `compile-logic`, `install-deploy`, `scope-backlog`. 항목당 최대 3개.
+  - 상태값: `[active]`, `[rejected]`, `[superseded]`, `[uncertain]`
+  - `**Observed:** 1 times (YYYY-MM-DD)`를 기본 포함한다 (최초 기록일 = 오늘 날짜)
 - `guardrails.md` — 대안이 하나로 고정된 케이스 (긍정형 행동으로 작성)
 - `anti-patterns.md` — 문맥에 따라 적절한 접근이 달라지는 케이스 (Observation-Reason-Instead 구조)
 - `troubleshooting.md` — 오류 메시지 ↔ 해법 매핑
 - `index.md` — Quick Reference 테이블 + 키워드 인덱스
 
 **B+C fusion 정책:**
-- 동일 결론 재확인 → `**Observed:** N times (date1, date2, ...)` 줄 추가 또는 카운트 증가
-- 반대 결론 → `[conflict: YYYY-MM-DD]` 태그 추가 + `> **New (YYYY-MM-DD):**` blockquote로 새 내용 보존
+- 동일 결론 재확인 → `**Observed:** N times (date1, date2, ...)` 줄 추가 또는 카운트 증가. 날짜가 서로 다른 날이면 독립적 재확인으로 더 높은 신뢰도를 의미한다.
+- 반대 결론 (동일 주제에서 이전 결정과 **직접적으로 모순되는** 결론) →
+  1. `[conflict: YYYY-MM-DD]` 태그 추가
+  2. `> **New (YYYY-MM-DD):**` blockquote로 새 내용 보존
+  3. 항목 상태를 `[uncertain]`으로 변경
+- `[uncertain]` 항목 처리 — 다음 컴파일 시 raw에서 추가 증거를 수집한다:
+  - 동일 방향 증거 발견 → `[active]`로 복귀 + conflict blockquote 아래에 판정 결과 기록
+  - 반대 방향 증거 확정 → `[superseded]` 또는 `[rejected]`로 확정
+  - 증거 없음 → `[uncertain]` 유지
 
 **Step 6: manifest 및 index.md 업데이트**
 
