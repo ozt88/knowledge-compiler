@@ -179,7 +179,7 @@ echo "--- Patching GSD agents ---"
 patch_agent \
     "$AGENTS_DIR/gsd-phase-researcher.md" \
     "$SCRIPT_DIR/patches/gsd-phase-researcher.patch.md" \
-    "## Step 1: Receive Scope and Load Context"
+    "## Step 1.5: Architectural Responsibility Mapping"
 
 patch_agent \
     "$AGENTS_DIR/gsd-planner.md" \

@@ -1,7 +1,7 @@
 ---
 slug: graphify-knowledge-integration
 title: Graphify + Knowledge Compiler 시너지 구현 (Tier 1 + Tier 2)
-status: open
+status: in_progress
 created: 2026-04-16
 updated: 2026-04-16
 ---
@@ -14,6 +14,7 @@ GSD 1.36.0에서 추가된 `/gsd-graphify`(코드베이스 구조 그래프)와
 우리 knowledge-compiler(세션 학습 파이프라인)를 연결한다.
 
 **핵심 아이디어:**
+
 - Graphify: "어디를" 건드려야 하나 (컴포넌트 구조/관계)
 - Knowledge: "거기서" 과거에 무슨 일이 있었나 (결정/실패/해법)
 - 지금은 두 시스템이 phase-researcher에서 독립 병렬 실행 → 연결되면 훨씬 정밀
@@ -41,8 +42,10 @@ graphify query 결과(노드 label들)를 knowledge index.md 검색 키워드에
 ```
 
 **구체적 로직 (패치에 추가할 내용):**
+
 ```
 **If graphify returned results (Step 1.3):**
+
 - Extract node labels from graph query results
 - Add these labels as additional keywords when searching knowledge/index.md
 - Example: graphify returned [AuthService, JwtValidator] →
@@ -50,11 +53,13 @@ graphify query 결과(노드 label들)를 knowledge index.md 검색 키워드에
 ```
 
 **패치 앵커 변경:**
+
 - 현재: `## Step 1: Receive Scope and Load Context` 앞에 삽입
 - 변경: Step 1.3 graphify 블록 뒤 어딘가에 삽입해야 함
 - → install.sh의 anchor 라인도 함께 변경 필요
 
 현재 install.sh:
+
 ```bash
 patch_agent \
     "$AGENTS_DIR/gsd-phase-researcher.md" \
@@ -74,22 +79,29 @@ patch_agent \
 **+ 프로젝트 소스:** `/home/ozt88/knowledge-compiler/skills/gsd-knowledge-compile/SKILL.md`
 
 **현재 `[context: ...]` 태그 정의:**
+
 ```
 카테고리: `file-loading`, `agent-behavior`, `knowledge-format`,
           `compile-logic`, `install-deploy`, `scope-backlog`
 ```
+
 추상적 카테고리라 graphify 노드명과 매칭이 안 됨.
 
 **변경 내용 (Step 5 `decisions.md` 업데이트 섹션에 추가):**
+
 ```markdown
+
 - `[context: ...]` 태그 선택 규칙 (graphify 활성 시):
   - `.planning/graphs/graph.json`이 존재하면 graphify가 활성화된 프로젝트
   - 해당 결정/가드레일이 특정 컴포넌트(클래스/모듈/서비스)에 관련된 경우
     → 해당 컴포넌트의 그래프 노드명을 context 태그로 사용
     → 예: `[context: AuthService, SessionStore]`
+
   - 코드베이스와 무관한 일반 결정 (컴파일 로직, 에이전트 동작 등)
     → 기존 추상 카테고리 유지: `[context: compile-logic]`
+
   - graphify 미활성 프로젝트 → 기존 방식 그대로
+
 ```
 
 ---
@@ -97,11 +109,13 @@ patch_agent \
 ## 파일 목록
 
 변경 대상 파일:
+
 1. `patches/gsd-phase-researcher.patch.md` — Tier 1 (knowledge lookup 로직 + 앵커 위치 변경)
 2. `install.sh` — Tier 1 (patch_agent 앵커 라인 변경)
 3. `skills/gsd-knowledge-compile/SKILL.md` — Tier 2 (context 태그 가이드 추가)
 
 설치 후 동기화:
+
 - `bash /home/ozt88/knowledge-compiler/install.sh --force` 실행 필요
 - `~/.claude/skills/gsd-knowledge-compile/SKILL.md`에 자동 반영됨
 
@@ -110,13 +124,17 @@ patch_agent \
 ## 전제 조건 확인 (새 세션에서 먼저 확인)
 
 ```bash
+
 # 1. phase-researcher의 현재 Step 1.3 끝 부분 확인 (새 앵커 결정용)
+
 grep -n "graph.json absent\|Step 1.5\|Step 1.4" ~/.claude/agents/gsd-phase-researcher.md
 
 # 2. 현재 패치 파일 내용 확인
+
 cat /home/ozt88/knowledge-compiler/patches/gsd-phase-researcher.patch.md
 
 # 3. 현재 knowledge-compile SKILL.md Step 5 섹션 확인
+
 grep -n "context\|태그" /home/ozt88/knowledge-compiler/skills/gsd-knowledge-compile/SKILL.md
 ```
 
