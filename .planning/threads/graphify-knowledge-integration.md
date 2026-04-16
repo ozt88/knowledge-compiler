@@ -1,7 +1,7 @@
 ---
 slug: graphify-knowledge-integration
 title: Graphify + Knowledge Compiler 시너지 구현 (Tier 1 + Tier 2)
-status: in_progress
+status: resolved
 created: 2026-04-16
 updated: 2026-04-16
 ---
