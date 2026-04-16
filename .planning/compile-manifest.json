@@ -1,5 +1,5 @@
 {
-  "last_compiled": "2026-04-15",
+  "last_compiled": "2026-04-16",
   "last_raw_captured": "2026-04-12T13:51:49.141Z",
   "source_files": {
     ".planning/phases/06-gsd-knowledge/06-CONTEXT.md": 1776004020,
@@ -15,7 +15,7 @@
     ".knowledge/raw/2026-04-12.md": 1776005758,
     ".knowledge/raw/2026-04-13.md": 1776151980,
     ".knowledge/raw/2026-04-14.md": 1776217855,
-    ".knowledge/raw/2026-04-15.md": 1776246644,
+    ".knowledge/raw/2026-04-15.md": 1776247028,
     ".planning/debug/knowledge-compilation-not-working.md": 1775825277,
     ".planning/phases/01-compiler-prompt-refactor/01-01-PLAN.md": 1775825277,
     ".planning/phases/01-compiler-prompt-refactor/01-01-SUMMARY.md": 1775825277,
@@ -78,6 +78,8 @@
     ".planning/quick/260413-o4d-skill-md-skill-md/SUMMARY.md": 1776068591,
     ".planning/quick/260414-mx1-install-sh-gsd-planner-md/SUMMARY.md": 1776151965,
     ".planning/quick/260415-oi4-troubleshooting-md-observed-skill-md/260415-oi4-PLAN.md": 1776242386,
-    ".planning/quick/260415-os2-anti-patterns-guardrails-troubleshooting/260415-os2-PLAN.md": 1776243210
+    ".planning/quick/260415-os2-anti-patterns-guardrails-troubleshooting/260415-os2-PLAN.md": 1776243210,
+    ".knowledge/raw/2026-04-16.md": 1776331612,
+    ".planning/threads/graphify-knowledge-integration.md": 1776331716
   }
 }

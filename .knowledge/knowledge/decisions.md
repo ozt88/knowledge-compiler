@@ -130,6 +130,14 @@
 **결정:** implementation 완료 후 docs가 현실과 달라진 경우 별도 gap-closure plan(--gaps 플래그)으로 문서 정렬. 이는 일반 실행 플랜과 달리 문서만 수정하는 패턴.
 **Observed:** 1 times (2026-04-13)
 
+## 설계 결정 — graphify 노드명 knowledge lookup 통합 (Tier 1+2)
+[active] [context: agent-behavior, knowledge-format]
+
+**시도:** phase-researcher에서 graphify(Step 1.3)와 knowledge lookup이 독립 병렬 실행. 패치가 Step 1 앞에 삽입되어 graphify 결과를 활용 불가
+**결과:** graphify가 반환한 컴포넌트 노드명이 knowledge lookup 키워드에 활용되지 않아 정밀도 저하
+**결정:** 패치 앵커를 `Step 1 앞` → `Step 1.5 앞`으로 재배치하여 graphify Step 1.3 결과 이후 knowledge lookup 수행. graphify 노드 레이블을 keyword set에 추가. SKILL.md context 태그에 graphify 활성 시 노드명 우선 사용 가이드 추가 (graphify 미활성 프로젝트는 기존 추상 카테고리 유지)
+**Observed:** 1 times (2026-04-16)
+
 ## 설계 결정 — Knowledge raw 수집 방식 변천
 [active] [context: compile-logic, agent-behavior]
 

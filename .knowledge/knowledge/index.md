@@ -1,13 +1,13 @@
 # Knowledge Index
 
-**Last compiled:** 2026-04-15
-**Total entries:** 56 (decisions: 18, guardrails: 14, anti-patterns: 7, troubleshooting: 12)
+**Last compiled:** 2026-04-16
+**Total entries:** 57 (decisions: 19, guardrails: 14, anti-patterns: 7, troubleshooting: 12)
 
 ## Quick Reference
 
 | 주제 | 파일 | 핵심 항목 |
 |------|------|-----------|
-| 설계 결정 (D-03, D-05, D-08 등) | decisions.md | guardrails/anti-patterns 분리, index-first 접근, D-08 동일성, PageIndex backlog, spec→implementation 전환+ROADMAP 동기화, researcher compile 제거→GSD 최소 부하 원칙, gap closure 플랜 패턴, knowledge raw 수집 명시적 전환, JSONL 참조율 측정, context/Observed 전체 파일 확장, knowledge seed universal 전략 |
+| 설계 결정 (D-03, D-05, D-08 등) | decisions.md | guardrails/anti-patterns 분리, index-first 접근, D-08 동일성, PageIndex backlog, spec→implementation 전환+ROADMAP 동기화, researcher compile 제거→GSD 최소 부하 원칙, gap closure 플랜 패턴, knowledge raw 수집 명시적 전환, JSONL 참조율 측정, context/Observed 전체 파일 확장, knowledge seed universal 전략, graphify 노드명 lookup 통합 |
 | 절대적 규칙 / 긍정형 액션 | guardrails.md | raw/ 읽기 경유 필수, D-08 블록 동일성(Phase 6 후 범위 축소), index.md 형식, 부정형 지시 금지, git push 승인, ROADMAP-PLAN 동기화, knowledge raw 수집 per-turn, templates 동기화, install.sh 실행 후 PATCH count 확인 필수, knowledge seed 파일 universal-only |
 | 맥락 의존적 주의사항 | anti-patterns.md | raw/ 직접 쿼리, docs 커밋 revert, gsd-tools 번호 버그, install.sh workflow 핸들러 스텁, gap closure staged deletion 미확인, Python PATCH 정리 후 --force 재실행 금지 |
 | 에러 → 해결 매핑 | troubleshooting.md | install.sh skip 버그, --force 인수 파싱 순서, awk -v 개행 소실, phase add 번호 오인, 검증 통과 후 revert, gap closure git reset --soft 파일 삭제, unpatch_agent 주석 블록 제거 불가, patch_workflow 앵커 무음 실패, local 함수 밖 사용 set -e 크래시 |
@@ -74,3 +74,5 @@ knowledge-compiler 프로젝트(v1.1 Positive Prompt Refactor)의 5개 Phase 진
 | seed | decisions.md#설계-결정--knowledge-seed-파일-universal-meta-knowledge-전략, guardrails.md#knowledge-seed-파일--universal-meta-knowledge-전용 |
 | local | troubleshooting.md#installsh--local-키워드-함수-밖-사용-set--e-크래시 |
 | set -e | troubleshooting.md#installsh--local-키워드-함수-밖-사용-set--e-크래시 |
+| graphify | decisions.md#설계-결정--graphify-노드명-knowledge-lookup-통합-tier-12 |
+| phase-researcher 앵커 | decisions.md#설계-결정--graphify-노드명-knowledge-lookup-통합-tier-12 |
