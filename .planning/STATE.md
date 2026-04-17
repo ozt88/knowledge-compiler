@@ -90,6 +90,7 @@ None yet.
 | 260414-mx1 | install.sh 버그 수정 + gsd-planner.md 마커 추가 | 2026-04-14 | f612cbe | [260414-mx1-install-sh-gsd-planner-md](.planning/quick/260414-mx1-install-sh-gsd-planner-md/) |
 | 260414-pdx | Phase 8 CONTEXT.md 생성 및 ROADMAP.md Phase 8 항목 추가 | 2026-04-14 | 0f11db0 | [260414-pdx-phase-8-context-md-roadmap-md-phase-8](.planning/quick/260414-pdx-phase-8-context-md-roadmap-md-phase-8/) |
 | 260414-pgt | Phase 7 스킵 처리 및 Phase 8 CONTEXT.md 업데이트 | 2026-04-14 | c346a53 | [260414-pgt-phase-7-phase-8-context-md](.planning/quick/260414-pgt-phase-7-phase-8-context-md/) |
+| 260417-itl | Phase 07 superseded by Phase 08 — create skip summaries | 2026-04-17 | 432870a | [260417-itl-phase-07-superseded-by-phase-08-create-s](.planning/quick/260417-itl-phase-07-superseded-by-phase-08-create-s/) |
 
 ## Session Continuity
 
