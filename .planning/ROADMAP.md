@@ -3,6 +3,7 @@
 ## Milestones
 
 - **v1.1 Positive Prompt Refactor** - Phases 1-7 (in progress)
+- **v1.2 Token Optimization** - Phases 9-10 (planned)
 
 ## Phases
 
@@ -18,6 +19,13 @@
 - [x] **Phase 6: GSD Knowledge Reference Audit** - GSD 각 단계 knowledge 참조 검증 및 보완 (completed 2026-04-13)
 - [ ] **Phase 7: Knowledge Reinforcement Decay Audit** - 유용한/참조된 지식 증강과 유용하지 않은 지식 감쇄가 잘 동작하고 있는지?
 - [ ] **Phase 8: Knowledge Record & Retrieve Design** - 기록 메타데이터 설계, 증강/감쇄 구현, 조회 활용 개선을 통합 설계한다
+
+### v1.2 Token Optimization (Planned)
+
+**Milestone Goal:** 클라이언트 단에서 CLI 출력을 압축해 LLM 토큰 소비를 절감하는 도구(RTK)를 선정·설치·설정하며 사내 보안 규정 준수를 위해 텔레메트리를 완전 비활성화한다
+
+- [ ] **Phase 9: Install & Secure** - RTK 설치, 글로벌 hook 등록, 텔레메트리 영구 비활성화
+- [ ] **Phase 10: Verify** - hook 통합 검증 및 GSD 워크플로 호환성 확인
 
 ## Phase Details
 
@@ -118,6 +126,29 @@ Plans:
 - [ ] 08-02-PLAN.md — SKILL.md uncertain 전환 + 패치 파일 조회 지침 + install.sh 재배포
 - [ ] 08-03-PLAN.md — B+C fusion 시뮬레이션 + 전체 검증
 
+### Phase 9: Install & Secure
+
+**Goal:** RTK가 설치되고 글로벌 Bash hook이 등록되며 텔레메트리가 영구적으로 차단된다
+**Depends on:** Nothing (first phase of v1.2)
+**Requirements**: INSTALL-01, INSTALL-02, SEC-01, SEC-02
+**Success Criteria** (what must be TRUE):
+  1. `rtk gain` 실행 시 토큰 절감 통계가 출력되어 RTK 바이너리가 올바른 패키지임을 확인할 수 있다
+  2. `~/.claude/settings.json`에 RTK `PreToolUse` Bash hook이 존재한다
+  3. `~/.bashrc`에 `RTK_TELEMETRY_DISABLED=1`이 영구 등록되어 새 셸 세션에서도 적용된다
+  4. `rtk telemetry status`가 "disabled"를 반환한다
+**Plans**: TBD
+
+### Phase 10: Verify
+
+**Goal:** RTK hook이 기존 GSD hook과 충돌 없이 동작하고, 실제 CLI 명령에서 압축 출력이 확인된다
+**Depends on:** Phase 9
+**Requirements**: VERIFY-01, VERIFY-02
+**Success Criteria** (what must be TRUE):
+  1. `~/.claude/settings.json`의 hooks 배열에서 RTK hook과 GSD hook(Write/Edit matcher)이 동시에 존재하며 JSON이 유효하다
+  2. `git status` 실행 시 RTK 압축 출력이 나타난다
+  3. `git commit` 실행 시 `gsd-validate-commit.sh`가 정상 동작한다 (RTK hook과 GSD commit hook 충돌 없음)
+**Plans**: TBD
+
 ## Backlog
 
 ### Phase 999.1: PageIndex Integration — Knowledge Search Layer (BACKLOG)
@@ -149,6 +180,8 @@ Plans:
 | 6. GSD Knowledge Reference Audit | v1.1 | 2/2 | Complete | 2026-04-13 |
 | 7. Knowledge Reinforcement Decay Audit | v1.1 | 0/2 | Skipped | 2026-04-14 |
 | 8. Knowledge Record & Retrieve Design | v1.2 | 0/3 | Planned | — |
+| 9. Install & Secure | v1.2 | 0/? | Not started | — |
+| 10. Verify | v1.2 | 0/? | Not started | — |
 
 ### Phase 7: Knowledge Reinforcement Decay Audit
 

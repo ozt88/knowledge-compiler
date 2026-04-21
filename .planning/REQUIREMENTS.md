@@ -47,11 +47,11 @@
 
 ## Traceability
 
-| REQ-ID | Phase |
-|--------|-------|
-| INSTALL-01 | — |
-| INSTALL-02 | — |
-| SEC-01 | — |
-| SEC-02 | — |
-| VERIFY-01 | — |
-| VERIFY-02 | — |
+| REQ-ID | Phase | Status |
+|--------|-------|--------|
+| INSTALL-01 | Phase 9 | Pending |
+| INSTALL-02 | Phase 9 | Pending |
+| SEC-01 | Phase 9 | Pending |
+| SEC-02 | Phase 9 | Pending |
+| VERIFY-01 | Phase 10 | Pending |
+| VERIFY-02 | Phase 10 | Pending |

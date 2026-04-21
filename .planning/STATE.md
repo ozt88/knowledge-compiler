@@ -2,11 +2,11 @@
 gsd_state_version: 1.0
 milestone: v1.2
 milestone_name: Token Optimization
-status: Defining requirements
+status: Roadmap defined
 stopped_at: ""
 last_updated: "2026-04-21T00:00:00.000Z"
 progress:
-  total_phases: 0
+  total_phases: 2
   completed_phases: 0
   total_plans: 0
   completed_plans: 0
@@ -24,10 +24,10 @@ See: .planning/PROJECT.md (updated 2026-04-21)
 
 ## Current Position
 
-Phase: Not started (defining requirements)
+Phase: Phase 9 — Install & Secure (not started)
 Plan: —
-Status: Defining requirements
-Last activity: 2026-04-21 — Milestone v1.2 started
+Status: Roadmap defined, ready to plan
+Last activity: 2026-04-21 — v1.2 roadmap created (Phase 9-10)
 
 ## Performance Metrics
 
@@ -64,12 +64,18 @@ Recent decisions affecting current work:
 - [Phase 06-gsd-knowledge]: discuss-phase 앵커를 load_prior_context → check_existing으로 수정
 - [Phase 06-gsd-knowledge]: D-18/D-19(310d15b) 이미 완료, D-20 install.sh gsd-clear 없음 확인
 - [Phase 07-skip]: Phase 7 Plans 실행 스킵 — RESEARCH.md는 Phase 8 canonical ref로 활용. audit은 Phase 8 구현 후 수행.
+- [v1.2-roadmap]: RTK는 `brew install rtk`로 설치 (cargo install 아님 — 이름 충돌 패키지 존재)
+- [v1.2-roadmap]: RTK_TELEMETRY_DISABLED=1은 `rtk init -g` 실행 전에 설정 필요
+- [v1.2-roadmap]: `rtk init -g`는 ~/.claude/settings.json에 PreToolUse Bash hook 등록
+- [v1.2-roadmap]: GSD 기존 hook은 Write/Edit matcher 사용 — RTK Bash hook과 충돌 없음
+- [v1.2-roadmap]: settings.json이 RTK 수정 후에도 유효한 JSON인지 검증 필요 (jq 의존성 확인 포함)
 
 ### Roadmap Evolution
 
 - Phase 4 added: Knowledge Importance Prioritization — raw 데이터 중 중요한 지식 판별 메커니즘 탐색
 - Phase 6 added: GSD Knowledge Reference Audit — gsd 각 단계들이 knowledge를 잘 참조하는지 확인필요
 - Phase 7 added: Knowledge Reinforcement Decay Audit — 유용한/참조된 지식 증강과 유용하지 않은 지식 감쇄가 잘 동작하고 있는지?
+- Phase 9-10 added (v1.2): RTK 설치·보안·검증 — Token Optimization 마일스톤 시작
 
 ### Pending Todos
 
@@ -96,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-14T07:30:02.223Z
-Stopped at: Completed quick 260414-mx1 install.sh 버그 수정 + gsd-planner.md 마커 추가
+Last session: 2026-04-21T00:00:00.000Z
+Stopped at: v1.2 roadmap created — Phase 9-10 defined
 Resume file: None
