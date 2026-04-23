@@ -136,7 +136,11 @@ Plans:
   2. `~/.claude/settings.json`에 RTK `PreToolUse` Bash hook이 존재한다
   3. `~/.bashrc`에 `RTK_TELEMETRY_DISABLED=1`이 영구 등록되어 새 셸 세션에서도 적용된다
   4. `rtk telemetry status`가 "disabled"를 반환한다
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 09-01-PLAN.md — RTK v0.37.2+ 설치 및 `rtk gain` 바이너리 검증 (Pitfall C1 차단)
+- [ ] 09-02-PLAN.md — ~/.bashrc env var 등록 + `rtk init -g` 훅 등록 + settings.json JSON 유효성 및 텔레메트리 상태 검증
 
 ### Phase 10: Verify
 
