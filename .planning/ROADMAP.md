@@ -151,7 +151,10 @@ Plans:
   1. `~/.claude/settings.json`의 hooks 배열에서 RTK hook과 GSD hook(Write/Edit matcher)이 동시에 존재하며 JSON이 유효하다
   2. `git status` 실행 시 RTK 압축 출력이 나타난다
   3. `git commit` 실행 시 `gsd-validate-commit.sh`가 정상 동작한다 (RTK hook과 GSD commit hook 충돌 없음)
-**Plans**: TBD
+**Plans:** 1 plan
+
+Plans:
+- [ ] 10-01-PLAN.md — settings.json 구조 검증 + RTK 압축 출력 확인 + gsd-validate-commit.sh 충돌 없음 dry-run, 결과를 10-VERIFICATION.md에 기록
 
 ## Backlog
 
@@ -185,7 +188,7 @@ Plans:
 | 7. Knowledge Reinforcement Decay Audit | v1.1 | 0/2 | Skipped | 2026-04-14 |
 | 8. Knowledge Record & Retrieve Design | v1.2 | 0/3 | Planned | — |
 | 9. Install & Secure | v1.2 | 0/? | Not started | — |
-| 10. Verify | v1.2 | 0/? | Not started | — |
+| 10. Verify | v1.2 | 0/1 | Planned | — |
 
 ### Phase 7: Knowledge Reinforcement Decay Audit
 
