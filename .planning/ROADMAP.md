@@ -140,7 +140,7 @@ Plans:
 
 Plans:
 - [x] 09-01-PLAN.md — RTK v0.37.2+ 설치 및 `rtk gain` 바이너리 검증 (Pitfall C1 차단)
-- [ ] 09-02-PLAN.md — ~/.bashrc env var 등록 + `rtk init -g` 훅 등록 + settings.json JSON 유효성 및 텔레메트리 상태 검증
+- [x] 09-02-PLAN.md — ~/.bashrc env var 등록 + `rtk init -g` 훅 등록 + settings.json JSON 유효성 및 텔레메트리 상태 검증
 
 ### Phase 10: Verify
 
