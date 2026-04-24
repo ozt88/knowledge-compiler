@@ -100,6 +100,24 @@
 **파일:** `skills/gsd-knowledge-compile/SKILL.md`, `install.sh` (install_skill 함수)
 **Observed:** 1 times (2026-04-15)
 
+## rtk init -g — 비대화형 모드 settings.json 패치 거부
+[context: install-deploy]
+
+**에러:** `rtk init -g` 실행 시 `(non-interactive mode, defaulting to N)` 출력 후 settings.json 자동 패치 거부
+**원인:** Claude Code 에이전트 환경에서 stdin이 파이프로 연결되어 있어 rtk가 non-interactive 모드로 실행됨
+**해결:** RTK 제공 hook 구조(`{"matcher": "Bash", "hooks": [{"type": "command", "command": "rtk hook claude"}]}`)를 Edit 도구로 `~/.claude/settings.json` PreToolUse 배열에 직접 삽입 후 `jq . ~/.claude/settings.json > /dev/null`로 유효성 검증
+**파일:** `~/.claude/settings.json`
+**Observed:** 1 times (2026-04-23)
+
+## rtk telemetry status — "disabled" 문자열 grep 실패
+[context: install-deploy]
+
+**에러:** `rtk telemetry status | grep disabled` → 매칭 없음. 텔레메트리 차단 여부 불확실
+**원인:** RTK v0.37.2 출력 포맷이 "disabled"가 아닌 `enabled: no`로 표현. PLAN에서 예상한 출력 포맷과 상이
+**해결:** `rtk telemetry status` 출력에서 `enabled: no` 확인. `RTK_TELEMETRY_DISABLED=1` env var이 설정되어 있으면 텔레메트리 차단 상태가 맞음. 버전별 출력 포맷 차이 가능 — grep 패턴을 `enabled: no`로 변경
+**파일:** `~/.bashrc` (RTK_TELEMETRY_DISABLED=1)
+**Observed:** 1 times (2026-04-23)
+
 ## install.sh — local 키워드 함수 밖 사용 (set -e 크래시)
 [context: install-deploy]
 

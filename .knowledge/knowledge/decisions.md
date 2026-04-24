@@ -138,6 +138,30 @@
 **결정:** 패치 앵커를 `Step 1 앞` → `Step 1.5 앞`으로 재배치하여 graphify Step 1.3 결과 이후 knowledge lookup 수행. graphify 노드 레이블을 keyword set에 추가. SKILL.md context 태그에 graphify 활성 시 노드명 우선 사용 가이드 추가 (graphify 미활성 프로젝트는 기존 추상 카테고리 유지)
 **Observed:** 1 times (2026-04-16)
 
+## 설계 결정 — RTK hook과 GSD hook matcher 레벨 분리 공존
+[active] [context: install-deploy, agent-behavior]
+
+**시도:** rtk init -g 실행으로 settings.json에 RTK PreToolUse Bash hook 자동 추가
+**결과:** RTK hook(`rtk hook claude`)과 기존 GSD hook(`gsd-validate-commit.sh`) 모두 Bash matcher에 등록됨. 충돌 없이 공존 확인
+**결정:** RTK hook은 Bash 도구 실행 전 command를 `rtk <cmd>`로 rewrite. GSD commit hook은 git commit 패턴만 처리(opt-in). 두 hook은 기능 레벨에서 독립적으로 동작하므로 동일 Bash matcher에서 공존 가능
+**Observed:** 1 times (2026-04-24)
+
+## 설계 결정 — gsd-validate-commit.sh opt-in 구조 (hooks.community)
+[active] [context: install-deploy, agent-behavior]
+
+**시도:** RTK hook 등록 후 GSD commit hook과 충돌 여부 확인
+**결과:** `.planning/config.json`에 `hooks.community: true` 없으면 즉시 exit 0 반환 — RTK 설치 여부와 무관하게 정상 통과
+**결정:** gsd-validate-commit.sh의 opt-in 구조로 인해 RTK와 충돌 없음. config.json에 hooks.community를 추가하지 않는 한 항상 exit 0
+**Observed:** 1 times (2026-04-24)
+
+## 설계 결정 — superseded Plan의 추적 완결 패턴
+[active] [context: agent-behavior, knowledge-format]
+
+**시도:** 실행되지 않은 Plan(Phase 07)을 SUMMARY.md 없이 방치
+**결과:** 추적 갭 발생 — gsd-tools가 Phase를 incomplete로 인식하고 ROADMAP 진행률 불일치
+**결정:** 스킵된 Plan은 `status: superseded` + `superseded_by: XX-YY-SUMMARY.md` + 실제 결과 커밋 참조를 포함한 SUMMARY.md를 생성하여 추적 완결
+**Observed:** 1 times (2026-04-17)
+
 ## 설계 결정 — Knowledge raw 수집 방식 변천
 [active] [context: compile-logic, agent-behavior]
 

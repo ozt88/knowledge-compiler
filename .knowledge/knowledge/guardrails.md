@@ -70,3 +70,18 @@ install.sh 실행(--force 포함) 후 즉시 `grep -c "PATCH:knowledge-compiler"
 [context: install-deploy, knowledge-format]
 
 templates/knowledge-seed/ 파일에는 어느 프로젝트에나 적용되는 meta-knowledge만 포함한다. 이 repo 고유 지식(install.sh 버그, GSD Phase 번호, PATCH count 등)은 이 repo의 .knowledge/knowledge/ 에만 기록한다.
+
+## RTK 설치 — brew 전용 (cargo 금지)
+[context: install-deploy]
+
+RTK(토큰 압축기)는 반드시 `brew install rtk`로 설치한다. `cargo install rtk`는 crates.io의 동명 패키지 Rust Type Kit을 설치하므로 절대 사용 금지. 설치 직후 `rtk gain` 실행으로 rtk-ai/rtk 바이너리임을 즉시 검증한다.
+
+## RTK init -g 비대화형 환경 — Edit으로 직접 패치
+[context: install-deploy]
+
+`rtk init -g`를 stdin 파이프 환경(Claude Code 에이전트)에서 실행하면 non-interactive 모드로 settings.json 자동 패치를 거부한다. RTK가 제공하는 JSON 구조를 참고하여 Edit 도구로 `~/.claude/settings.json`에 직접 패치하고, jq 유효성 검증으로 완료한다.
+
+## bash -c 'source ~/.bashrc' — 비대화형 검증 불가
+[context: install-deploy, agent-behavior]
+
+`~/.bashrc` 상단에 인터랙티브 가드(`case $- in *i*`)가 있으면 `bash -c 'source ~/.bashrc && echo $VAR'`는 즉시 early-return하여 env var을 검증할 수 없다. 반드시 `bash -i -c 'echo $VAR'`로 인터랙티브 모드에서 검증한다.

@@ -48,6 +48,22 @@
 **대신:** Python 제거 후에는 `install.sh`(--force 없이) 실행. count=0이면 신규 삽입, count=1이면 skip
 **Observed:** 1 times (2026-04-15)
 
+## crates.io rtk 설치 혼동 (Pitfall C1)
+[context: install-deploy]
+
+**관찰:** `cargo install rtk` 실행으로 RTK 토큰 압축기 설치 시도
+**이유:** crates.io에 동명 패키지 "rtk"(Rust Type Kit)가 존재 — 토큰 압축기와 무관한 별개 패키지
+**대신:** `brew install rtk` 사용 후 즉시 `rtk gain` 실행으로 rtk-ai/rtk 바이너리임을 검증. "savings" 키워드 출력 확인 — "unrecognized command" 출력 시 잘못된 바이너리
+**Observed:** 1 times (2026-04-23)
+
+## rtk telemetry status "disabled" 문자열 없음
+[context: install-deploy]
+
+**관찰:** `rtk telemetry status` 출력에 "disabled" 문자열을 grep으로 확인하려 할 때 매칭 실패
+**이유:** RTK v0.37.2 실제 출력 포맷은 `enabled: no` (+ `env override: RTK_TELEMETRY_DISABLED=1 (blocked)`) — "disabled" 단어 미포함
+**대신:** `rtk telemetry status` 출력에서 `enabled: no` 확인. `RTK_TELEMETRY_DISABLED=1` env var 설정 시 텔레메트리는 차단된 것이 맞음
+**Observed:** 1 times (2026-04-23)
+
 ## gap closure 실행 전 staged deletion 미확인
 [context: install-deploy, agent-behavior]
 

@@ -1,5 +1,5 @@
 {
-  "last_compiled": "2026-04-16",
+  "last_compiled": "2026-04-24",
   "last_raw_captured": "2026-04-12T13:51:49.141Z",
   "source_files": {
     ".planning/phases/06-gsd-knowledge/06-CONTEXT.md": 1776004020,
@@ -80,6 +80,28 @@
     ".planning/quick/260415-oi4-troubleshooting-md-observed-skill-md/260415-oi4-PLAN.md": 1776242386,
     ".planning/quick/260415-os2-anti-patterns-guardrails-troubleshooting/260415-os2-PLAN.md": 1776243210,
     ".knowledge/raw/2026-04-16.md": 1776331612,
-    ".planning/threads/graphify-knowledge-integration.md": 1776331716
+    ".planning/threads/graphify-knowledge-integration.md": 1776331716,
+    ".knowledge/raw/2026-04-17.md": 1776400609,
+    ".knowledge/raw/2026-04-21.md": 1776755347,
+    ".knowledge/raw/2026-04-23.md": 1776938372,
+    ".knowledge/raw/2026-04-24.md": 1777002387,
+    ".planning/phases/09-install-secure/09-01-PLAN.md": 1776934296,
+    ".planning/phases/09-install-secure/09-01-SUMMARY.md": 1776938402,
+    ".planning/phases/09-install-secure/09-02-PLAN.md": 1776934396,
+    ".planning/phases/09-install-secure/09-02-SUMMARY.md": 1776992282,
+    ".planning/phases/09-install-secure/09-CONTEXT.md": 1776764591,
+    ".planning/phases/09-install-secure/09-RESEARCH.md": 1776933934,
+    ".planning/phases/09-install-secure/09-PATTERNS.md": 1776934176,
+    ".planning/phases/09-install-secure/09-VALIDATION.md": 1776933986,
+    ".planning/phases/09-install-secure/09-VERIFICATION.md": 1776992593,
+    ".planning/phases/10-verify/10-01-PLAN.md": 1777001567,
+    ".planning/phases/10-verify/10-01-SUMMARY.md": 1777002162,
+    ".planning/phases/10-verify/10-VERIFICATION.md": 1777002324,
+    ".planning/phases/10-verify/10-RESEARCH.md": 1777001290,
+    ".planning/phases/10-verify/10-PATTERNS.md": 1777001418,
+    ".planning/phases/10-verify/10-VALIDATION.md": 1777001343,
+    ".planning/phases/07-knowledge-reinforcement-decay-audit/07-01-SUMMARY.md": 1776400625,
+    ".planning/phases/07-knowledge-reinforcement-decay-audit/07-02-SUMMARY.md": 1776400625,
+    ".planning/debug/websearch-haiku-model-error.md": 1776934165
   }
 }
