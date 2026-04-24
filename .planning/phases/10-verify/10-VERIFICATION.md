@@ -69,3 +69,46 @@ Total PreToolUse hooks: 5
 
 ## SC-2: RTK 압축 출력 확인 (VERIFY-02)
 
+### 실행 명령
+
+```bash
+rtk git status
+echo "exit code: $?"
+```
+
+### 실제 출력
+
+```
+* master...origin/master [ahead 18]
+~ Modified: 2 files
+   .planning/STATE.md
+   templates/claude-md-section.md
+? Untracked: 7 files
+   .claude/
+   .knowledge/raw/2026-04-21.md
+   .knowledge/raw/2026-04-23.md
+   .knowledge/raw/2026-04-24.md
+   .planning/debug/websearch-haiku-model-error.md
+   .planning/phases/09-install-secure/09-PATTERNS.md
+   .planning/phases/09-install-secure/09-RESEARCH.md
+exit code: 0
+```
+
+### 판정 기준 체크리스트
+
+| # | 기준 | 결과 |
+|---|------|------|
+| 1 | exit code == 0 | ✓ PASS (exit code: 0) |
+| 2 | `~ Modified:` 또는 `? Untracked:` 포함 (RTK 압축 포맷 시그니처) | ✓ PASS (둘 다 포함) |
+| 3 | 원본 git status 안내 문구 `(use "git add` 또는 `(use "git restore` 미포함 | ✓ PASS (RTK가 제거함) |
+
+### 판정
+
+판정: PASS
+
+요구사항: VERIFY-02
+
+---
+
+## SC-3: GSD commit hook 충돌 없음 검증 (VERIFY-02)
+
