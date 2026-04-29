@@ -1,6 +1,6 @@
 # Knowledge Index
 
-**Last compiled:** 2026-04-24
+**Last compiled:** 2026-04-27
 **Total entries:** 69 (decisions: 22, guardrails: 17, anti-patterns: 9, troubleshooting: 14)
 
 ## Quick Reference

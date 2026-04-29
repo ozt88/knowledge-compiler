@@ -143,8 +143,12 @@
 
 **시도:** rtk init -g 실행으로 settings.json에 RTK PreToolUse Bash hook 자동 추가
 **결과:** RTK hook(`rtk hook claude`)과 기존 GSD hook(`gsd-validate-commit.sh`) 모두 Bash matcher에 등록됨. 충돌 없이 공존 확인
-**결정:** RTK hook은 Bash 도구 실행 전 command를 `rtk <cmd>`로 rewrite. GSD commit hook은 git commit 패턴만 처리(opt-in). 두 hook은 기능 레벨에서 독립적으로 동작하므로 동일 Bash matcher에서 공존 가능
-**Observed:** 1 times (2026-04-24)
+**결정:** RTK hook은 Bash 도구 실행 전 command를 `rtk <cmd>`로 rewrite. GSD commit hook은 git commit 패턴만 처리(opt-in). 두 hook은 기능 레벨에서 독립적으로 동작하므로 동일 Bash matcher에서 공존 가능.
+충돌 없는 이유 3가지:
+1. GSD guard hook [0~2]는 Write|Edit matcher → RTK(Bash only)와 완전 분리
+2. gsd-validate-commit.sh는 opt-in(hooks.community: true 없으면 즉시 exit 0) → 현재 비활성
+3. 실행 순서 보장: [3] exit 0 → [4] rtk rewrite. [3]이 block(exit 2)하면 [4] 미실행 → 동시 수정 불가
+**Observed:** 2 times (2026-04-24, 2026-04-27)
 
 ## 설계 결정 — gsd-validate-commit.sh opt-in 구조 (hooks.community)
 [active] [context: install-deploy, agent-behavior]

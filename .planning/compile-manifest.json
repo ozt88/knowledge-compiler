@@ -1,5 +1,5 @@
 {
-  "last_compiled": "2026-04-24",
+  "last_compiled": "2026-04-27",
   "last_raw_captured": "2026-04-12T13:51:49.141Z",
   "source_files": {
     ".planning/phases/06-gsd-knowledge/06-CONTEXT.md": 1776004020,
@@ -102,6 +102,7 @@
     ".planning/phases/10-verify/10-VALIDATION.md": 1777001343,
     ".planning/phases/07-knowledge-reinforcement-decay-audit/07-01-SUMMARY.md": 1776400625,
     ".planning/phases/07-knowledge-reinforcement-decay-audit/07-02-SUMMARY.md": 1776400625,
-    ".planning/debug/websearch-haiku-model-error.md": 1776934165
+    ".planning/debug/websearch-haiku-model-error.md": 1776934165,
+    ".knowledge/raw/2026-04-27.md": 1777443722
   }
 }
