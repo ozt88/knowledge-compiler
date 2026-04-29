@@ -1,6 +1,6 @@
 ## Knowledge Compiler — raw 수집
 
-응답할 때마다 `.knowledge/raw/YYYY-MM-DD.md`에 기록할 만한 내용이 있으면 append한다:
+응답할 때마다 **primary working directory 기준** `.knowledge/raw/YYYY-MM-DD.md`에 기록할 만한 내용이 있으면 append한다. 경로는 항상 절대경로로 계산한다: `{primary_working_directory}/.knowledge/raw/YYYY-MM-DD.md`.
 
 ```
 ### HH:MM — 한줄 제목
